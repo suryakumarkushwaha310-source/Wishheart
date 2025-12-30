@@ -1,17 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>WishHeart</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
 <body>
 
-<!-- Splash Screen -->
+<!-- SPLASH -->
 <div id="splash">
   <div class="teddy">🧸</div>
-  <h1 class="fade">WishHeart</h1>
-  <p>Loading...</p>
+  <div class="heart">❤️</div>
+  <h2>Welcome</h2>
+  <p class="loading">Loading...</p>
+  <p class="made">Made by Sumit</p>
 </div>
 
-<!-- Home Screen -->
+<!-- HOME -->
 <div id="home" class="hidden">
-  <h2>💖 Welcome</h2>
-  <button onclick="alert('Next Step Coming')">New Project</button>
+  <div class="top">
+    <span class="menu">⋮</span>
+    <h1>Welcome</h1>
+  </div>
+
+  <div class="new-project" onclick="openCategory()">
+    <div class="plus">＋</div>
+    <p>New Project</p>
+  </div>
+</div>
+
+<!-- CATEGORY -->
+<div id="category" class="hidden page">
+  <h2>Choose Your Category</h2>
+  <button onclick="openForm('newyear')">🎉 New Year</button>
+  <button onclick="openForm('birthday')">🎂 Birthday</button>
+</div>
+
+<!-- FORM -->
+<div id="form" class="hidden page">
+  <h2 id="formTitle"></h2>
+
+  <input id="toName" placeholder="Name the person you want to wish">
+  <input id="fromName" placeholder="Your name">
+  <textarea id="message" placeholder="Write your message"></textarea>
+  <input type="file" id="photo">
+  <input id="password" placeholder="Set password">
+
+  <button onclick="generateWish()">Generate Wish</button>
+</div>
+
+<!-- WISH -->
+<div id="wish" class="hidden page wish-bg">
+  <div class="heart-box">
+    <div id="bigHeart">❤️</div>
+    <p>Click & hold for 5 seconds</p>
+  </div>
 </div>
 
 <script src="script.js"></script>
 </body>
+                          </html>
