@@ -1,15 +1,14 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', sans-serif;
 }
 
 body {
   background: white;
 }
 
-/* SPLASH */
+/* Splash */
 #splash {
   background: black;
   color: white;
@@ -18,102 +17,30 @@ body {
   padding-top: 30%;
 }
 
-.teddy {
-  font-size: 80px;
-}
+.teddy { font-size: 80px; }
+.heart { font-size: 50px; margin: 10px 0; }
+.loading { color: white; }
+.made { margin-top: 10px; font-size: 14px; }
 
-.heart {
-  font-size: 50px;
-}
+/* Home */
+.hidden { display: none; }
 
-.loading {
-  color: white;
-  margin-top: 10px;
-}
-
-.made {
-  margin-top: 5px;
-  font-size: 14px;
-}
-
-/* COMMON */
-.hidden {
-  display: none;
-}
-
-.screen {
-  padding: 20px;
-  text-align: center;
-}
-
-/* HOME */
 .top {
   display: flex;
   align-items: center;
-  padding: 10px;
+  padding: 15px;
 }
 
 .menu {
-  font-size: 30px;
+  font-size: 24px;
   margin-right: 10px;
 }
 
-.new-project {
-  margin-top: 150px;
+.new {
+  margin-top: 120px;
   text-align: center;
-  cursor: pointer;
 }
 
 .plus {
-  font-size: 60px;
-  color: #ff4d6d;
-}
-
-/* FORM */
-input, textarea {
-  width: 90%;
-  padding: 10px;
-  margin: 10px 0;
-}
-
-button {
-  padding: 12px 20px;
-  background: #ff4d6d;
-  color: white;
-  border: none;
-  border-radius: 8px;
-}
-
-/* WISH */
-.wish-bg {
-  background: #2b003f;
-  color: pink;
-  height: 100vh;
-  overflow: hidden;
-}
-
-.wish-box {
-  margin-top: 40%;
-  background: rgba(0,0,0,0.5);
-  padding: 20px;
-  border-radius: 12px;
-}
-
-/* HEART ANIMATION */
-.hearts span {
-  position: fixed;
-  bottom: -20px;
-  font-size: 18px;
-  animation: float 6s linear infinite;
-}
-
-@keyframes float {
-  from {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  to {
-    transform: translateY(-100vh);
-    opacity: 0;
-  }
+  font-size: 50px;
 }
