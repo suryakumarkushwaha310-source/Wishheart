@@ -1,51 +1,55 @@
-body {
-  margin: 0;
-  font-family: Arial;
-}
+body { margin:0; font-family:sans-serif; }
+
+.hidden { display:none; }
 
 /* SPLASH */
 #splash {
-  background: black;
-  color: white;
-  height: 100vh;
-  text-align: center;
-  padding-top: 30%;
+  background:black;
+  color:white;
+  height:100vh;
+  text-align:center;
+  padding-top:30%;
 }
-.teddy { font-size: 80px; }
-.heart { font-size: 50px; }
-
-/* COMMON */
-.hidden { display: none; }
-button {
-  padding: 12px;
-  margin: 10px;
-  background: #ff4d6d;
-  color: white;
-  border: none;
-  border-radius: 10px;
-}
+.teddy { font-size:80px; }
+.red-heart { font-size:50px; }
+.loading { color:white; }
+.made { opacity:0.7; }
 
 /* HOME */
-.top {
-  display: flex;
-  align-items: center;
-}
-.menu { font-size: 30px; }
+#home { text-align:center; padding-top:40%; }
 .new {
-  margin-top: 150px;
-  font-size: 24px;
-  text-align: center;
+  font-size:28px;
+  margin-top:40px;
+  color:#ff4d6d;
+}
+
+/* FORM */
+#form { padding:20px; }
+input, textarea {
+  width:100%;
+  margin:10px 0;
+  padding:10px;
 }
 
 /* WISH */
-.wish-bg {
-  background: #2b003f;
-  color: pink;
-  height: 100vh;
+#wish {
+  background:#2b003f;
+  height:100vh;
+  color:pink;
 }
 .box {
-  margin-top: 40%;
-  background: rgba(0,0,0,0.5);
-  padding: 20px;
-  border-radius: 12px;
+  margin-top:40%;
+  background:rgba(0,0,0,0.5);
+  padding:20px;
+  border-radius:12px;
+}
+.hearts::before {
+  content:"❤️ ❤️ ❤️ ❤️ ❤️";
+  animation: float 5s infinite;
+}
+
+@keyframes float {
+  0% { opacity:0; }
+  50% { opacity:1; }
+  100% { opacity:0; }
 }
