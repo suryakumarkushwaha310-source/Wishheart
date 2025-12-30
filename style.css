@@ -1,11 +1,12 @@
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: Arial, sans-serif;
 }
 
 body {
-  margin: 0;
-  background: #fff;
+  background: white;
 }
 
 /* SPLASH */
@@ -27,11 +28,12 @@ body {
 
 .loading {
   color: white;
+  margin-top: 10px;
 }
 
 .made {
-  margin-top: 10px;
-  opacity: 0.7;
+  margin-top: 5px;
+  font-size: 14px;
 }
 
 /* COMMON */
@@ -39,7 +41,7 @@ body {
   display: none;
 }
 
-.page {
+.screen {
   padding: 20px;
   text-align: center;
 }
@@ -48,45 +50,70 @@ body {
 .top {
   display: flex;
   align-items: center;
+  padding: 10px;
 }
 
 .menu {
-  font-size: 28px;
+  font-size: 30px;
   margin-right: 10px;
 }
 
 .new-project {
-  margin-top: 120px;
+  margin-top: 150px;
   text-align: center;
   cursor: pointer;
 }
 
 .plus {
-  font-size: 40px;
+  font-size: 60px;
+  color: #ff4d6d;
 }
 
-/* BUTTON */
+/* FORM */
+input, textarea {
+  width: 90%;
+  padding: 10px;
+  margin: 10px 0;
+}
+
 button {
-  padding: 12px;
-  margin: 10px;
-  border: none;
-  border-radius: 10px;
+  padding: 12px 20px;
   background: #ff4d6d;
   color: white;
-  font-size: 16px;
+  border: none;
+  border-radius: 8px;
 }
 
 /* WISH */
 .wish-bg {
   background: #2b003f;
-  height: 100vh;
   color: pink;
+  height: 100vh;
+  overflow: hidden;
 }
 
-.heart-box {
+.wish-box {
   margin-top: 40%;
+  background: rgba(0,0,0,0.5);
+  padding: 20px;
+  border-radius: 12px;
 }
 
-#bigHeart {
-  font-size: 90px;
+/* HEART ANIMATION */
+.hearts span {
+  position: fixed;
+  bottom: -20px;
+  font-size: 18px;
+  animation: float 6s linear infinite;
+}
+
+@keyframes float {
+  from {
+    transform: translateY(0);
+    opacity: 1;
   }
+  to {
+    transform: translateY(-100vh);
+    opacity: 0;
+  }
+}
