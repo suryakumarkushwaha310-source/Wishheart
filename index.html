@@ -4,50 +4,7 @@
   <meta charset="UTF-8">
   <title>WishHeart</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body{
-      margin:0;
-      font-family: Arial, sans-serif;
-      background:black;
-      color:white;
-      text-align:center;
-      overflow:hidden;
-    }
-    #splash{
-      height:100vh;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      align-items:center;
-    }
-    .teddy{
-      font-size:80px;
-    }
-    .heart{
-      font-size:50px;
-      margin:10px;
-    }
-    .loading{
-      margin-top:20px;
-      font-size:18px;
-    }
-    #home{
-      display:none;
-      background:white;
-      color:black;
-      height:100vh;
-      padding-top:40px;
-    }
-    .btn{
-      background:#ff4d88;
-      color:white;
-      padding:15px;
-      border-radius:10px;
-      width:200px;
-      margin:20px auto;
-      font-size:18px;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -56,22 +13,23 @@
   <div class="teddy">🧸</div>
   <div class="heart">❤️</div>
   <h2>Welcome</h2>
-  <div class="loading">Loading...</div>
-  <p>Made by Sumit</p>
+  <p class="loading">Loading...</p>
+  <p class="made">Made by Sumit</p>
 </div>
 
 <!-- HOME -->
-<div id="home">
-  <h1>Welcome</h1>
-  <div class="btn">＋ New Project</div>
+<div id="home" class="hidden">
+  <div class="top">
+    <span class="menu">⋮</span>
+    <h1>Welcome</h1>
+  </div>
+
+  <div class="new" onclick="alert('Next step soon')">
+    <div class="plus">＋</div>
+    <p>New Project</p>
+  </div>
 </div>
 
-<script>
-  setTimeout(()=>{
-    document.getElementById("splash").style.display="none";
-    document.getElementById("home").style.display="block";
-  },5000);
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
