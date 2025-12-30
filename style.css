@@ -1,46 +1,35 @@
-* {
-  margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', sans-serif;
+body{margin:0;font-family:sans-serif;text-align:center}
+
+.splash{
+background:black;color:white;height:100vh;padding-top:25%;
 }
 
-body {
-  background: white;
+.teddy{font-size:80px}
+.heart{font-size:50px}
+
+.loading{color:white}
+.made{margin-top:10px}
+
+.top{display:flex;align-items:center;padding:10px}
+.top span{font-size:30px}
+
+.new{margin-top:100px}
+.plus{font-size:60px}
+
+button{
+padding:15px;
+margin:10px;
+background:pink;
+border:none;
+border-radius:10px;
 }
 
-/* Splash */
-#splash {
-  background: black;
-  color: white;
-  height: 100vh;
-  text-align: center;
-  padding-top: 30%;
+.wishbg{
+background:#2b003f;
+height:100vh;
+color:pink;
 }
 
-.teddy { font-size: 80px; }
-.heart { font-size: 50px; margin: 10px 0; }
-.loading { color: white; }
-.made { margin-top: 10px; font-size: 14px; }
-
-/* Home */
-.hidden { display: none; }
-
-.top {
-  display: flex;
-  align-items: center;
-  padding: 15px;
-}
-
-.menu {
-  font-size: 24px;
-  margin-right: 10px;
-}
-
-.new {
-  margin-top: 120px;
-  text-align: center;
-}
-
-.plus {
-  font-size: 50px;
+#bigHeart{
+font-size:100px;
 }
