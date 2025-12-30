@@ -4,60 +4,74 @@
   <meta charset="UTF-8">
   <title>WishHeart</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+  <style>
+    body{
+      margin:0;
+      font-family: Arial, sans-serif;
+      background:black;
+      color:white;
+      text-align:center;
+      overflow:hidden;
+    }
+    #splash{
+      height:100vh;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+    }
+    .teddy{
+      font-size:80px;
+    }
+    .heart{
+      font-size:50px;
+      margin:10px;
+    }
+    .loading{
+      margin-top:20px;
+      font-size:18px;
+    }
+    #home{
+      display:none;
+      background:white;
+      color:black;
+      height:100vh;
+      padding-top:40px;
+    }
+    .btn{
+      background:#ff4d88;
+      color:white;
+      padding:15px;
+      border-radius:10px;
+      width:200px;
+      margin:20px auto;
+      font-size:18px;
+    }
+  </style>
 </head>
 <body>
 
-<!-- SPLASH SCREEN -->
+<!-- SPLASH -->
 <div id="splash">
   <div class="teddy">🧸</div>
   <div class="heart">❤️</div>
   <h2>Welcome</h2>
-  <p class="loading">Loading...</p>
-  <p class="made">Made by Sumit</p>
+  <div class="loading">Loading...</div>
+  <p>Made by Sumit</p>
 </div>
 
-<!-- HOME SCREEN -->
-<div id="home" class="hidden">
-  <div class="top">
-    <div class="menu">⋮</div>
-    <h1>Welcome</h1>
-  </div>
-
-  <div class="new-project" onclick="openCategory()">
-    <div class="plus">＋</div>
-    <p>New Project</p>
-  </div>
+<!-- HOME -->
+<div id="home">
+  <h1>Welcome</h1>
+  <div class="btn">＋ New Project</div>
 </div>
 
-<!-- CATEGORY -->
-<div id="category" class="hidden screen">
-  <h2>Choose Your Category</h2>
-  <button onclick="openForm('newyear')">🎉 New Year</button>
-  <button onclick="openForm('birthday')">🎂 Birthday</button>
-</div>
+<script>
+  setTimeout(()=>{
+    document.getElementById("splash").style.display="none";
+    document.getElementById("home").style.display="block";
+  },5000);
+</script>
 
-<!-- FORM -->
-<div id="form" class="hidden screen">
-  <h2 id="formTitle"></h2>
-  <input id="toName" placeholder="Name the person you want to wish">
-  <input id="fromName" placeholder="Your Name">
-  <textarea id="message" placeholder="Write your message"></textarea>
-  <input type="file" id="photo">
-  <input id="password" placeholder="Set Password">
-  <button onclick="generateWish()">Generate Wish</button>
-</div>
-
-<!-- WISH -->
-<div id="wish" class="hidden screen wish-bg">
-  <div class="hearts"></div>
-  <div class="wish-box">
-    <h1 id="wishTitle"></h1>
-    <p id="wishFrom"></p>
-    <p id="wishMsg"></p>
-  </div>
-</div>
-
-<script src="script.js"></script>
 </body>
-                      </html>
+</html>
