@@ -51,4 +51,4 @@ function hideAll() {
   document.querySelectorAll("body > div").forEach(d =>
     d.classList.add("hidden")
   );
-    }
+}
