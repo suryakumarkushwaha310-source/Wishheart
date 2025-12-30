@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>WishHeart</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,44 +12,49 @@
 <div id="splash">
   <div class="teddy">🧸</div>
   <div class="heart">❤️</div>
-  <p>Welcome</p>
-  <span>Loading...</span>
-  <small>Made by Sumit</small>
+  <h2>Welcome</h2>
+  <p class="loading">Loading...</p>
+  <p class="made">Made by Sumit</p>
 </div>
 
 <!-- HOME -->
 <div id="home" class="hidden">
-  <header>
-    <span onclick="openSaved()">⋮</span>
+  <div class="top">
+    <span class="menu">⋮</span>
     <h1>Welcome</h1>
-  </header>
+  </div>
 
-  <div class="new" onclick="openCategory()">＋ New Project</div>
+  <div class="new" onclick="openCategory()">
+    ＋ New Project
+  </div>
 </div>
 
 <!-- CATEGORY -->
 <div id="category" class="hidden">
-  <h2>Choose your category</h2>
+  <h2>Choose Your Category</h2>
   <button onclick="openForm('newyear')">🎉 New Year</button>
   <button onclick="openForm('birthday')">🎂 Birthday</button>
 </div>
 
 <!-- FORM -->
 <div id="form" class="hidden">
-  <input id="to" placeholder="Person name">
-  <input id="from" placeholder="Your name">
-  <textarea id="msg" placeholder="Message"></textarea>
-  <input id="pass" placeholder="Set password">
+  <input id="toName" placeholder="Name the person you want to wish">
+  <input id="fromName" placeholder="Your Name">
+  <textarea id="msg" placeholder="Write message"></textarea>
+  <input type="file">
+  <input id="pass" placeholder="Set Password">
   <button onclick="generate()">Generate Wish</button>
 </div>
 
 <!-- WISH -->
 <div id="wish" class="hidden wish-bg">
-  <h1 id="title"></h1>
-  <p id="by"></p>
-  <p id="text"></p>
+  <div class="box">
+    <h1 id="title"></h1>
+    <p id="by"></p>
+    <p id="text"></p>
+  </div>
 </div>
 
 <script src="script.js"></script>
 </body>
-  </html>
+</html>
