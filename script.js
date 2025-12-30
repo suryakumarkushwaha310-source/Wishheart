@@ -1,31 +1,35 @@
-setTimeout(()=>{
-  splash.style.display="none";
-  home.classList.remove("hidden");
-},5000);
+let type = "";
 
-function openCategory(){
-  home.classList.add("hidden");
+setTimeout(() => {
+  splash.classList.add("hidden");
+  home.classList.remove("hidden");
+}, 5000);
+
+function openCategory() {
+  hideAll();
   category.classList.remove("hidden");
 }
 
-function openForm(type){
-  category.classList.add("hidden");
+function openForm(t) {
+  type = t;
+  hideAll();
   form.classList.remove("hidden");
-  window.type = type;
 }
 
-function generate(){
-  title.innerText = type==="newyear"
-    ? "Happy New Year " + to.value
-    : "Happy Birthday " + to.value;
-
-  by.innerText = "By " + from.value;
-  text.innerText = msg.value;
-
-  form.classList.add("hidden");
+function generate() {
+  hideAll();
   wish.classList.remove("hidden");
+
+  title.innerText =
+    type === "newyear"
+      ? "Happy New Year " + toName.value
+      : "Happy Birthday " + toName.value;
+
+  by.innerText = "By " + fromName.value;
+  text.innerText = msg.value;
 }
 
-function openSaved(){
-  alert("Saved wishes coming soon");
+function hideAll() {
+  document.querySelectorAll("body > div")
+    .forEach(d => d.classList.add("hidden"));
 }
