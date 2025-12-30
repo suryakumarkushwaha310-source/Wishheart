@@ -1,4 +1,92 @@
-setTimeout(() => {
-  document.getElementById("splash").style.display = "none";
-  document.getElementById("home").classList.remove("hidden");
-}, 5000);
+* {
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  margin: 0;
+  background: #fff;
+}
+
+/* SPLASH */
+#splash {
+  background: black;
+  color: white;
+  height: 100vh;
+  text-align: center;
+  padding-top: 30%;
+}
+
+.teddy {
+  font-size: 80px;
+}
+
+.heart {
+  font-size: 50px;
+}
+
+.loading {
+  color: white;
+}
+
+.made {
+  margin-top: 10px;
+  opacity: 0.7;
+}
+
+/* COMMON */
+.hidden {
+  display: none;
+}
+
+.page {
+  padding: 20px;
+  text-align: center;
+}
+
+/* HOME */
+.top {
+  display: flex;
+  align-items: center;
+}
+
+.menu {
+  font-size: 28px;
+  margin-right: 10px;
+}
+
+.new-project {
+  margin-top: 120px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.plus {
+  font-size: 40px;
+}
+
+/* BUTTON */
+button {
+  padding: 12px;
+  margin: 10px;
+  border: none;
+  border-radius: 10px;
+  background: #ff4d6d;
+  color: white;
+  font-size: 16px;
+}
+
+/* WISH */
+.wish-bg {
+  background: #2b003f;
+  height: 100vh;
+  color: pink;
+}
+
+.heart-box {
+  margin-top: 40%;
+}
+
+#bigHeart {
+  font-size: 90px;
+    }
