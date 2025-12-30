@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<!-- SPLASH -->
+<!-- SPLASH SCREEN -->
 <div id="splash">
   <div class="teddy">🧸</div>
   <div class="heart">❤️</div>
@@ -17,10 +17,10 @@
   <p class="made">Made by Sumit</p>
 </div>
 
-<!-- HOME -->
+<!-- HOME SCREEN -->
 <div id="home" class="hidden">
   <div class="top">
-    <span class="menu">⋮</span>
+    <div class="menu">⋮</div>
     <h1>Welcome</h1>
   </div>
 
@@ -31,33 +31,33 @@
 </div>
 
 <!-- CATEGORY -->
-<div id="category" class="hidden page">
+<div id="category" class="hidden screen">
   <h2>Choose Your Category</h2>
   <button onclick="openForm('newyear')">🎉 New Year</button>
   <button onclick="openForm('birthday')">🎂 Birthday</button>
 </div>
 
 <!-- FORM -->
-<div id="form" class="hidden page">
+<div id="form" class="hidden screen">
   <h2 id="formTitle"></h2>
-
   <input id="toName" placeholder="Name the person you want to wish">
-  <input id="fromName" placeholder="Your name">
+  <input id="fromName" placeholder="Your Name">
   <textarea id="message" placeholder="Write your message"></textarea>
   <input type="file" id="photo">
-  <input id="password" placeholder="Set password">
-
+  <input id="password" placeholder="Set Password">
   <button onclick="generateWish()">Generate Wish</button>
 </div>
 
 <!-- WISH -->
-<div id="wish" class="hidden page wish-bg">
-  <div class="heart-box">
-    <div id="bigHeart">❤️</div>
-    <p>Click & hold for 5 seconds</p>
+<div id="wish" class="hidden screen wish-bg">
+  <div class="hearts"></div>
+  <div class="wish-box">
+    <h1 id="wishTitle"></h1>
+    <p id="wishFrom"></p>
+    <p id="wishMsg"></p>
   </div>
 </div>
 
 <script src="script.js"></script>
 </body>
-                          </html>
+                      </html>
