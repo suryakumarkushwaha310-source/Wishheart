@@ -1,35 +1,37 @@
-body{margin:0;font-family:sans-serif;text-align:center}
+body { margin:0; font-family:sans-serif; }
 
-.splash{
-background:black;color:white;height:100vh;padding-top:25%;
+.hidden { display:none; }
+
+#splash {
+  background:black;
+  color:white;
+  height:100vh;
+  text-align:center;
+  padding-top:30%;
 }
 
-.teddy{font-size:80px}
-.heart{font-size:50px}
+.teddy { font-size:80px; }
+.heart { font-size:50px; }
 
-.loading{color:white}
-.made{margin-top:10px}
-
-.top{display:flex;align-items:center;padding:10px}
-.top span{font-size:30px}
-
-.new{margin-top:100px}
-.plus{font-size:60px}
-
-button{
-padding:15px;
-margin:10px;
-background:pink;
-border:none;
-border-radius:10px;
+header {
+  display:flex;
+  justify-content:space-between;
+  padding:10px;
 }
 
-.wishbg{
-background:#2b003f;
-height:100vh;
-color:pink;
+.new {
+  margin:100px auto;
+  width:200px;
+  padding:20px;
+  text-align:center;
+  background:pink;
+  border-radius:20px;
 }
 
-#bigHeart{
-font-size:100px;
+.wish-bg {
+  background:#2b003f;
+  height:100vh;
+  color:pink;
+  padding-top:40%;
+  text-align:center;
 }
