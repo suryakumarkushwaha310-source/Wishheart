@@ -1,35 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
   <title>WishHeart</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="splash">
 
-<!-- SPLASH -->
-<div id="splash">
   <div class="teddy">🧸</div>
   <div class="heart">❤️</div>
   <h2>Welcome</h2>
   <p class="loading">Loading...</p>
   <p class="made">Made by Sumit</p>
-</div>
 
-<!-- HOME -->
-<div id="home" class="hidden">
-  <div class="top">
-    <span class="menu">⋮</span>
-    <h1>Welcome</h1>
-  </div>
+  <script>
+    setTimeout(()=>{
+      window.location.href="home.html";
+    },5000);
+  </script>
 
-  <div class="new" onclick="alert('Next step soon')">
-    <div class="plus">＋</div>
-    <p>New Project</p>
-  </div>
-</div>
-
-<script src="script.js"></script>
 </body>
 </html>
