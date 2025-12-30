@@ -1,92 +1,24 @@
-* {
-  box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
+setTimeout(() => {
+  document.getElementById("splash").classList.add("hidden");
+  document.getElementById("home").classList.remove("hidden");
+}, 5000);
+
+function hideAll() {
+  document.querySelectorAll("body > div").forEach(d => d.classList.add("hidden"));
 }
 
-body {
-  margin: 0;
-  background: #fff;
+function openCategory() {
+  hideAll();
+  category.classList.remove("hidden");
 }
 
-/* SPLASH */
-#splash {
-  background: black;
-  color: white;
-  height: 100vh;
-  text-align: center;
-  padding-top: 30%;
+function openForm(type) {
+  hideAll();
+  form.classList.remove("hidden");
+  formTitle.innerText = type === "newyear" ? "New Year Wish" : "Birthday Wish";
 }
 
-.teddy {
-  font-size: 80px;
+function generateWish() {
+  hideAll();
+  wish.classList.remove("hidden");
 }
-
-.heart {
-  font-size: 50px;
-}
-
-.loading {
-  color: white;
-}
-
-.made {
-  margin-top: 10px;
-  opacity: 0.7;
-}
-
-/* COMMON */
-.hidden {
-  display: none;
-}
-
-.page {
-  padding: 20px;
-  text-align: center;
-}
-
-/* HOME */
-.top {
-  display: flex;
-  align-items: center;
-}
-
-.menu {
-  font-size: 28px;
-  margin-right: 10px;
-}
-
-.new-project {
-  margin-top: 120px;
-  text-align: center;
-  cursor: pointer;
-}
-
-.plus {
-  font-size: 40px;
-}
-
-/* BUTTON */
-button {
-  padding: 12px;
-  margin: 10px;
-  border: none;
-  border-radius: 10px;
-  background: #ff4d6d;
-  color: white;
-  font-size: 16px;
-}
-
-/* WISH */
-.wish-bg {
-  background: #2b003f;
-  height: 100vh;
-  color: pink;
-}
-
-.heart-box {
-  margin-top: 40%;
-}
-
-#bigHeart {
-  font-size: 90px;
-    }
