@@ -2,20 +2,55 @@
 <html>
 <head>
   <title>WishHeart</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
 </head>
-<body style="margin:0; background:black; color:white; display:flex; justify-content:center; align-items:center; height:100vh; flex-direction:column;">
+<body>
 
-  <h1>❤️ WishHeart</h1>
-  <p>Loading...</p>
-  <p>Made by Sumit</p>
+<!-- SPLASH -->
+<div id="splash">
+  <div class="teddy">🧸</div>
+  <div class="red-heart">❤️</div>
+  <h2>Welcome</h2>
+  <p class="loading">Loading...</p>
+  <p class="made">Made by Sumit</p>
+</div>
 
-  <script>
-    setTimeout(function(){
-      document.body.innerHTML = "<h2 style='color:pink'>Home Page Loaded</h2>";
-    },5000);
-  </script>
+<!-- HOME -->
+<div id="home" class="hidden">
+  <div class="top">
+    <span class="menu">⋮</span>
+    <h1>Welcome</h1>
+  </div>
+  <div class="new" onclick="openForm()">＋ New Project</div>
+</div>
 
+<!-- FORM -->
+<div id="form" class="hidden">
+  <h2>Create New Year Wish</h2>
+  <input id="to" placeholder="Name of person">
+  <input id="from" placeholder="Your name">
+  <textarea id="msg" placeholder="Write your message"></textarea>
+  <input id="pass" placeholder="Set password">
+  <button onclick="generate()">Generate Wish</button>
+</div>
+
+<!-- PASSWORD -->
+<div id="lock" class="hidden">
+  <h2>Enter Password</h2>
+  <input id="check">
+  <button onclick="unlock()">Unlock</button>
+</div>
+
+<!-- WISH -->
+<div id="wish" class="hidden">
+  <div class="hearts"></div>
+  <div class="box">
+    <h1 id="title"></h1>
+    <p id="by"></p>
+    <p id="text"></p>
+  </div>
+</div>
+
+<script src="script.js"></script>
 </body>
-</html>
+    </html>
