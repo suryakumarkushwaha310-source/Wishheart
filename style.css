@@ -1,37 +1,51 @@
-body { margin:0; font-family:sans-serif; }
+body {
+  margin: 0;
+  font-family: Arial;
+}
 
-.hidden { display:none; }
-
+/* SPLASH */
 #splash {
-  background:black;
-  color:white;
-  height:100vh;
-  text-align:center;
-  padding-top:30%;
+  background: black;
+  color: white;
+  height: 100vh;
+  text-align: center;
+  padding-top: 30%;
+}
+.teddy { font-size: 80px; }
+.heart { font-size: 50px; }
+
+/* COMMON */
+.hidden { display: none; }
+button {
+  padding: 12px;
+  margin: 10px;
+  background: #ff4d6d;
+  color: white;
+  border: none;
+  border-radius: 10px;
 }
 
-.teddy { font-size:80px; }
-.heart { font-size:50px; }
-
-header {
-  display:flex;
-  justify-content:space-between;
-  padding:10px;
+/* HOME */
+.top {
+  display: flex;
+  align-items: center;
 }
-
+.menu { font-size: 30px; }
 .new {
-  margin:100px auto;
-  width:200px;
-  padding:20px;
-  text-align:center;
-  background:pink;
-  border-radius:20px;
+  margin-top: 150px;
+  font-size: 24px;
+  text-align: center;
 }
 
+/* WISH */
 .wish-bg {
-  background:#2b003f;
-  height:100vh;
-  color:pink;
-  padding-top:40%;
-  text-align:center;
+  background: #2b003f;
+  color: pink;
+  height: 100vh;
+}
+.box {
+  margin-top: 40%;
+  background: rgba(0,0,0,0.5);
+  padding: 20px;
+  border-radius: 12px;
 }
