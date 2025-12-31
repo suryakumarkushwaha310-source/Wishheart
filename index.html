@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>WishHeart</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>WishHeart</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -13,52 +13,60 @@
   <div class="teddy">🧸</div>
   <div class="heart">❤️</div>
   <h2>Welcome</h2>
-  <p>Loading...</p>
+  <p class="loading">Loading...</p>
   <p class="made">Made by Sumit</p>
 </div>
 
 <!-- HOME -->
 <div id="home" class="screen">
   <div class="top">
-    <span class="menu" onclick="showSaved()">⋮</span>
+    <span class="menu">⋮</span>
     <h1>Welcome</h1>
   </div>
-  <button class="main-btn" onclick="openCategory()">＋ New Project</button>
+  <div class="newProject" onclick="showCategory()">
+    <div class="plus">＋</div>
+    <p>New Project</p>
+  </div>
 </div>
 
 <!-- CATEGORY -->
 <div id="category" class="screen">
   <h2>Choose Your Category</h2>
-  <button onclick="openForm('newyear')">🎉 New Year</button>
-  <button onclick="openForm('birthday')">🎂 Birthday</button>
+  <button onclick="selectType('newyear')">🎉 New Year</button>
+  <button onclick="selectType('birthday')">🎂 Birthday</button>
 </div>
 
 <!-- FORM -->
 <div id="form" class="screen">
-  <h2 id="formTitle"></h2>
+  <h2>Create Wish</h2>
   <input id="toName" placeholder="Person Name">
   <input id="fromName" placeholder="Your Name">
-  <textarea id="message" placeholder="Write message"></textarea>
-  <input type="file" id="photo">
-  <input id="password" placeholder="Set Password">
+  <textarea id="message" placeholder="Write your message"></textarea>
+  <input type="password" id="password" placeholder="Set Password">
   <button onclick="generateWish()">Generate Wish</button>
 </div>
 
 <!-- PASSWORD -->
-<div id="passwordScreen" class="screen">
+<div id="unlock" class="screen">
   <h2>Enter Password</h2>
-  <input id="checkPass" placeholder="Password">
+  <input type="password" id="unlockPass">
   <button onclick="unlockWish()">Unlock</button>
 </div>
 
 <!-- WISH -->
 <div id="wish" class="screen dark">
   <div class="hearts"></div>
-  <div class="box">
-    <h1 id="wishTitle"></h1>
-    <p id="wishBy"></p>
-    <p id="wishMsg"></p>
+  <div class="centerBox">
+    <div id="bigHeart" onmousedown="holdStart()" onmouseup="holdEnd()">❤️</div>
+    <p>Hold for 5 seconds</p>
   </div>
+</div>
+
+<!-- FINAL -->
+<div id="final" class="screen dark">
+  <h1 id="finalTitle"></h1>
+  <p id="finalFrom"></p>
+  <p id="finalMsg"></p>
 </div>
 
 <script src="script.js"></script>
