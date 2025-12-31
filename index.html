@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>WishHeart</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -13,17 +13,17 @@
   <div class="teddy">🧸</div>
   <div class="heart">❤️</div>
   <h2>Welcome</h2>
-  <p class="loading">Loading...</p>
+  <p>Loading...</p>
   <p class="made">Made by Sumit</p>
 </div>
 
 <!-- HOME -->
 <div id="home" class="screen">
   <div class="top">
-    <div class="menu" onclick="showSaved()">⋮</div>
+    <span class="menu" onclick="showSaved()">⋮</span>
     <h1>Welcome</h1>
   </div>
-  <div class="newProject" onclick="openCategory()">＋<br/>New Project</div>
+  <button class="main-btn" onclick="openCategory()">＋ New Project</button>
 </div>
 
 <!-- CATEGORY -->
@@ -36,40 +36,31 @@
 <!-- FORM -->
 <div id="form" class="screen">
   <h2 id="formTitle"></h2>
-  <input id="toName" placeholder="Person Name" />
-  <input id="fromName" placeholder="Your Name" />
+  <input id="toName" placeholder="Person Name">
+  <input id="fromName" placeholder="Your Name">
   <textarea id="message" placeholder="Write message"></textarea>
-  <input type="file" id="photo" />
-  <input id="password" placeholder="Set Password" />
+  <input type="file" id="photo">
+  <input id="password" placeholder="Set Password">
   <button onclick="generateWish()">Generate Wish</button>
 </div>
 
 <!-- PASSWORD -->
 <div id="passwordScreen" class="screen">
   <h2>Enter Password</h2>
-  <input id="checkPassword" placeholder="Password" />
+  <input id="checkPass" placeholder="Password">
   <button onclick="unlockWish()">Unlock</button>
 </div>
 
 <!-- WISH -->
-<div id="wish" class="screen wishBg">
+<div id="wish" class="screen dark">
   <div class="hearts"></div>
   <div class="box">
-    <div class="bigHeart" id="holdHeart">❤️</div>
-    <p>Hold for 5 seconds</p>
-  </div>
-</div>
-
-<!-- FINAL -->
-<div id="final" class="screen finalBg">
-  <div class="box">
-    <h1 id="finalTitle"></h1>
-    <p id="finalFrom"></p>
-    <p id="finalMsg"></p>
-    <button onclick="goHome()">Save</button>
+    <h1 id="wishTitle"></h1>
+    <p id="wishBy"></p>
+    <p id="wishMsg"></p>
   </div>
 </div>
 
 <script src="script.js"></script>
 </body>
-  </html>
+</html>
