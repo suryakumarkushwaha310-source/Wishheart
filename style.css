@@ -1,58 +1,60 @@
 body {
   margin: 0;
   font-family: Arial;
+  text-align: center;
   background: black;
   color: white;
-  text-align: center;
 }
 
-.hide { display: none; }
+.hidden { display: none; }
 
 #splash {
   height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  background: black;
 }
-
-.teddy { width: 150px; margin: auto; }
+.teddy {
+  width: 150px;
+  margin-top: 100px;
+}
+.loading { color: white; }
+.by { color: gray; }
 
 .top {
   display: flex;
   justify-content: space-between;
-  padding: 15px;
+  padding: 10px;
 }
 
-.new {
+.newBtn {
+  margin-top: 100px;
   font-size: 22px;
   padding: 20px;
 }
 
-input, textarea {
-  width: 90%;
-  padding: 10px;
-  margin: 8px;
-}
-
-button {
-  padding: 12px 20px;
-  margin: 10px;
-  font-size: 18px;
-}
-
-#wish {
-  background: radial-gradient(#2b0033, black);
-  height: 100vh;
-}
-
-.box {
-  background: rgba(0,0,0,0.6);
-  margin: 50px;
-  padding: 20px;
-  border-radius: 15px;
-}
-
-#wishImg {
+input, textarea, select {
   width: 80%;
-  border-radius: 15px;
-  }
+  margin: 10px;
+  padding: 10px;
+}
+
+.heartHold {
+  font-size: 80px;
+  margin-top: 150px;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.book {
+  font-size: 80px;
+  margin-top: 200px;
+}
+
+#finalPhoto {
+  width: 200px;
+  border-radius: 10px;
+}
