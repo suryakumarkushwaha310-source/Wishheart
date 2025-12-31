@@ -1,42 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>WishHeart</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>WishHeart</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <!-- SPLASH -->
 <div id="splash">
-  <div class="teddy">🧸</div>
+  🧸
   <div class="heart">❤️</div>
-  <h1>Welcome</h1>
+  <h2>Welcome</h2>
   <p>Loading...</p>
   <small>Made by Sumit</small>
 </div>
 
-<!-- HOME -->
-<div id="home" class="hide">
-  <h2>WishHeart 💖</h2>
-  <button onclick="openForm()">Create New Wish</button>
-</div>
+<!-- APP -->
+<div id="app" class="hidden">
 
-<!-- FORM -->
-<div id="form" class="hide">
-  <input id="to" placeholder="To Name">
-  <input id="from" placeholder="From Name">
-  <textarea id="msg" placeholder="Your Message"></textarea>
-  <button onclick="generateWish()">Generate Wish</button>
-</div>
+  <!-- HOME -->
+  <section id="home">
+    <h1>💖 WishHeart</h1>
+    <button onclick="goForm()">Create Wish</button>
+  </section>
 
-<!-- WISH -->
-<div id="wish" class="hide">
-  <div class="card">
-    <h2 id="wishTo"></h2>
+  <!-- FORM -->
+  <section id="form" class="hidden">
+    <input id="toName" placeholder="To Name">
+    <input id="fromName" placeholder="From Name">
+    <textarea id="message" placeholder="Your Message"></textarea>
+    <input id="password" placeholder="Set Password">
+    <button onclick="generateWish()">Generate Wish</button>
+  </section>
+
+  <!-- PASSWORD -->
+  <section id="lock" class="hidden">
+    <h2>🔒 Enter Password</h2>
+    <input id="unlockPass" placeholder="Password">
+    <button onclick="unlockWish()">Unlock</button>
+  </section>
+
+  <!-- WISH -->
+  <section id="wish" class="hidden">
+    <div class="fireworks"></div>
+    <h2 id="wishTitle"></h2>
     <p id="wishMsg"></p>
-    <h4 id="wishFrom"></h4>
-  </div>
+    <button onclick="shareWish()">🔗 Share Link</button>
+  </section>
+
 </div>
 
 <script src="script.js"></script>
