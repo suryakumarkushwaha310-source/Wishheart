@@ -1,26 +1,34 @@
-// Splash → Home after 5 sec
+// Splash timer
 setTimeout(() => {
   document.getElementById("splash").style.display = "none";
   document.getElementById("home").classList.remove("hidden");
 }, 5000);
 
-function showForm() {
-  document.getElementById("home").classList.add("hidden");
+// Navigation
+function openForm() {
+  hideAll();
   document.getElementById("form").classList.remove("hidden");
 }
 
 function generateWish() {
-  const to = document.getElementById("to").value;
-  const from = document.getElementById("from").value;
-  const msg = document.getElementById("msg").value;
+  let to = document.getElementById("toName").value;
+  let from = document.getElementById("fromName").value;
+  let msg = document.getElementById("message").value;
 
-  document.getElementById("form").classList.add("hidden");
+  document.getElementById("finalText").innerText =
+    "Dear " + to + " ❤️\n" + msg + "\n\nFrom: " + from;
+
+  hideAll();
   document.getElementById("wish").classList.remove("hidden");
-
-  document.getElementById("wishText").innerHTML =
-    `💌 Dear ${to}<br><br>${msg}<br><br>— ${from}`;
 }
 
 function restart() {
-  location.reload();
+  hideAll();
+  document.getElementById("home").classList.remove("hidden");
+}
+
+function hideAll() {
+  document.getElementById("home").classList.add("hidden");
+  document.getElementById("form").classList.add("hidden");
+  document.getElementById("wish").classList.add("hidden");
 }
