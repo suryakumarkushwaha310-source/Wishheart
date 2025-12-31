@@ -3,83 +3,83 @@
 <head>
 <meta charset="UTF-8">
 <title>WishHeart</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <!-- SPLASH -->
-<div id="splash" class="screen black">
-  <div class="center">
-    <div class="emoji">🧸❤️</div>
-    <h1>Welcome</h1>
-    <p>Loading...</p>
-    <small>Made by Sumit</small>
-  </div>
+<div id="splash">
+  <div class="teddy">🧸</div>
+  <div class="heart">❤️</div>
+  <p>Welcome</p>
+  <span>Loading...</span>
+  <small>Made by Sumit</small>
 </div>
 
 <!-- HOME -->
-<div id="home" class="screen white hidden">
-  <div class="topbar">
-    <span class="logo">WishHeart</span>
-    <span id="menuBtn">⋮</span>
+<div id="home" class="hidden">
+  <header>
+    <h1>Welcome</h1>
+    <div id="menuBtn">⋮</div>
+  </header>
+
+  <div id="menu" class="hidden">
+    <h3>Saved Wishes</h3>
+    <ul id="savedList"></ul>
   </div>
 
-  <div id="menu" class="menu hidden"></div>
-
-  <h2>Welcome</h2>
   <button id="newProject">＋ New Project</button>
 </div>
 
-<!-- CREATE -->
-<div id="create" class="screen white hidden">
+<!-- CATEGORY -->
+<div id="category" class="hidden center">
   <h2>Choose Your Category</h2>
-  <button onclick="selectCategory('newyear')">🎉 New Year</button>
+  <button onclick="selectCategory('newyear')">🎆 New Year</button>
   <button onclick="selectCategory('birthday')">🎂 Birthday</button>
-
-  <div id="form" class="hidden">
-    <input id="toName" placeholder="Name of the person">
-    <input id="fromName" placeholder="Your Name">
-    <textarea id="message" placeholder="Write description"></textarea>
-    <input type="file" id="photo">
-    <input id="password" placeholder="Set Password">
-    <button onclick="generateLink()">Generate Link</button>
-    <p id="linkBox"></p>
-  </div>
 </div>
 
-<!-- PASSWORD -->
-<div id="unlock" class="screen white hidden">
+<!-- FORM -->
+<div id="form" class="hidden">
+  <h2>Create Wish</h2>
+  <input id="toName" placeholder="Name of person">
+  <input id="fromName" placeholder="Your name">
+  <textarea id="message" placeholder="Write message"></textarea>
+  <input type="file" id="photo">
+  <input id="password" placeholder="Set password">
+  <button onclick="generateLink()">Generate Link</button>
+</div>
+
+<!-- PASSWORD SCREEN -->
+<div id="lock" class="hidden center">
   <h2>Enter Password</h2>
-  <input id="unlockPass" placeholder="Password">
-  <button onclick="unlock()">Unlock</button>
+  <input id="unlockPass">
+  <button onclick="unlockWish()">Open Wish</button>
 </div>
 
 <!-- WISH -->
-<div id="wish" class="screen black hidden">
-  <div class="floating"></div>
-  <div class="card">
+<div id="wish" class="hidden">
+  <div class="box">
     <h1 id="wishTitle"></h1>
-    <p id="wishMsg"></p>
-    <img id="wishImg">
-    <p class="by"></p>
-    <button onclick="showNotebook()">Next</button>
+    <img id="wishPhoto">
+    <p id="wishFrom"></p>
+    <button onclick="openNotebook()">Next</button>
   </div>
 </div>
 
 <!-- NOTEBOOK -->
-<div id="note" class="screen white hidden">
-  <div class="notebook">
-    <h3>Dear ❤️</h3>
-    <p id="noteText"></p>
+<div id="notebook" class="hidden center">
+  <div class="note" onclick="openNote()">
+    📖 Please open it dear
   </div>
-  <button onclick="showGift()">Next</button>
+  <p id="noteText" class="hidden"></p>
+  <button onclick="finalGift()">Next</button>
 </div>
 
-<!-- GIFT -->
-<div id="gift" class="screen white hidden">
-  <div class="gift">🌹 🍫</div>
-  <h3>It's for you dear</h3>
+<!-- FINAL -->
+<div id="final" class="hidden center">
+  🌹 🍫
+  <h2>Its for you dear</h2>
+  <button onclick="saveWish()">Save</button>
 </div>
 
 <script src="script.js"></script>
