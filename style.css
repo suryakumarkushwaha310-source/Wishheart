@@ -1,81 +1,66 @@
 body {
   margin: 0;
   font-family: Arial;
-  text-align: center;
+  background: #fff;
 }
 
-.hidden { display: none; }
+.screen { display: none; padding: 20px; }
 
 #splash {
   background: black;
   color: white;
   height: 100vh;
-  padding-top: 100px;
+  text-align: center;
+  padding-top: 30%;
 }
 
-.teddy {
-  width: 150px;
+.teddy { width: 120px; }
+
+.heart {
+  font-size: 24px;
+  margin: 10px;
 }
 
-.loading {
-  animation: blink 1s infinite;
-}
-
-@keyframes blink {
-  50% { opacity: 0.3; }
-}
-
-#home {
-  padding: 20px;
-}
-
-.top {
+header {
   display: flex;
   justify-content: space-between;
 }
 
-.newProject {
-  margin-top: 100px;
-  padding: 20px;
-  border: 2px dashed pink;
-  cursor: pointer;
+#menu {
+  display: none;
+  background: #eee;
+  padding: 10px;
 }
 
-#creator button,
-#form button,
-#passwordScreen button {
-  padding: 15px;
+.center {
+  text-align: center;
+  margin-top: 40%;
+}
+
+button {
+  padding: 10px 20px;
   margin: 10px;
 }
 
-input, textarea {
-  width: 90%;
-  padding: 10px;
-  margin: 5px;
-}
-
-#heart {
-  font-size: 80px;
-  margin-top: 200px;
-  cursor: pointer;
-}
-
-#wish {
-  background: black;
+.dark {
+  background: #12002b;
   color: pink;
-  min-height: 100vh;
+  height: 100vh;
+  text-align: center;
+}
+
+#holdHeart {
+  font-size: 80px;
+  margin-top: 40%;
 }
 
 #wishPhoto {
-  width: 200px;
-  border-radius: 10px;
+  max-width: 200px;
+  margin: 10px;
 }
 
-#notebook {
-  font-size: 50px;
-  margin-top: 200px;
-}
-
-#final {
-  font-size: 30px;
+.book {
+  font-size: 24px;
+  padding: 40px;
+  border: 2px solid pink;
 }
