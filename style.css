@@ -1,78 +1,55 @@
-*{box-sizing:border-box;font-family:Arial}
-body{margin:0}
-
-.screen{
-  min-height:100vh;
-  padding:20px;
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: white;
 }
 
-.black{background:#000;color:#fff}
-.white{background:#fff;color:#000}
-.hidden{display:none}
+.hidden { display: none; }
+.center { text-align: center; padding: 40px; }
 
-.center{text-align:center;margin-top:30vh}
-.emoji{font-size:50px}
-
-.topbar{
-  display:flex;
-  justify-content:space-between;
-  font-size:20px;
+#splash {
+  background: black;
+  color: white;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-button{
-  padding:12px;
-  width:100%;
-  margin:10px 0;
-  font-size:16px;
+.teddy { font-size: 80px; }
+.heart { font-size: 60px; }
+
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
 }
 
-input,textarea{
-  width:100%;
-  padding:10px;
-  margin:8px 0;
+#menu {
+  background: #eee;
+  padding: 10px;
 }
 
-.menu{
-  position:absolute;
-  top:50px;
-  right:10px;
-  background:#eee;
-  padding:10px;
+button {
+  padding: 12px;
+  margin: 10px;
+  font-size: 16px;
 }
 
-.card{
-  background:#111;
-  padding:20px;
-  margin-top:20vh;
-  border-radius:10px;
-  text-align:center;
+.box {
+  background: black;
+  color: pink;
+  padding: 20px;
 }
 
-.card img{
-  max-width:100%;
-  margin:10px 0;
+img {
+  max-width: 200px;
+  margin: 10px;
 }
 
-.floating::before{
-  content:"❤️ ❤️ ❤️ ❤️ ❤️";
-  animation:float 6s infinite linear;
-  display:block;
-  text-align:center;
-}
-
-@keyframes float{
-  0%{opacity:0}
-  50%{opacity:1}
-  100%{opacity:0}
-}
-
-.notebook{
-  border:2px solid #ccc;
-  padding:20px;
-  background:#fdf3e7;
-}
-
-.gift{
-  font-size:40px;
-  text-align:center;
+.note {
+  border: 2px solid pink;
+  padding: 30px;
+  cursor: pointer;
 }
