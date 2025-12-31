@@ -1,61 +1,72 @@
-let data = {};
+let holdTimer;
+let wishData;
 
 setTimeout(() => {
   splash.style.display = "none";
-  home.classList.remove("hide");
+  home.classList.remove("hidden");
 }, 5000);
 
-function openCategory() {
-  home.classList.add("hide");
-  category.classList.remove("hide");
+function openForm() {
+  home.classList.add("hidden");
+  form.classList.remove("hidden");
 }
 
-function openForm(type) {
-  data.type = type;
-  category.classList.add("hide");
-  form.classList.remove("hide");
-}
+function generateWish() {
+  wishData = {
+    cat: category.value,
+    to: toName.value,
+    from: fromName.value,
+    msg: message.value,
+    pass: password.value,
+    photo: ""
+  };
 
-function generate() {
-  data.to = toName.value;
-  data.from = fromName.value;
-  data.msg = message.value;
-  data.pass = password.value;
-
-  let file = photo.files[0];
+  const file = photo.files[0];
   if (file) {
-    let reader = new FileReader();
-    reader.onload = () => {
-      data.img = reader.result;
-      save();
-    };
+    const reader = new FileReader();
+    reader.onload = () => wishData.photo = reader.result;
     reader.readAsDataURL(file);
-  } else save();
+  }
+
+  localStorage.setItem("wish", JSON.stringify(wishData));
+
+  form.classList.add("hidden");
+  passwordScreen.classList.remove("hidden");
 }
 
-function save() {
-  localStorage.setItem("wish", JSON.stringify(data));
-  alert("Link Generated & Saved");
-  showLock();
+function checkPassword() {
+  const data = JSON.parse(localStorage.getItem("wish"));
+  if (enterPass.value === data.pass) {
+    passwordScreen.classList.add("hidden");
+    wish.classList.remove("hidden");
+  } else {
+    alert("Wrong password");
+  }
 }
 
-function showLock() {
-  form.classList.add("hide");
-  lock.classList.remove("hide");
+function startHold() {
+  holdTimer = setTimeout(() => {
+    wish.classList.add("hidden");
+    notebook.classList.remove("hidden");
+  }, 5000);
 }
 
-function unlock() {
-  let saved = JSON.parse(localStorage.getItem("wish"));
-  if (unlockPass.value === saved.pass) {
-    lock.classList.add("hide");
-    showWish(saved);
-  } else alert("Wrong Password");
+function stopHold() {
+  clearTimeout(holdTimer);
 }
 
-function showWish(d) {
-  wish.classList.remove("hide");
-  wishTitle.innerText =
-    d.type === "birthday" ? "Happy Birthday " + d.to : "Happy New Year " + d.to;
-  wishMsg.innerText = d.msg + "\n— " + d.from;
-  if (d.img) wishImg.src = d.img;
+function openBook() {
+  const data = JSON.parse(localStorage.getItem("wish"));
+  notebook.classList.add("hidden");
+  finalMessage.classList.remove("hidden");
+
+  finalTitle.innerText =
+    (data.cat === "birthday" ? "Happy Birthday " : "Happy New Year ") + data.to;
+
+  finalText.innerText = data.msg;
+  if (data.photo) finalPhoto.src = data.photo;
 }
+
+function openSaved() {
+  alert("Saved wishes are auto-loaded");
+    }
