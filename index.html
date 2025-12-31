@@ -1,68 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>WishHeart</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>WishHeart</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <!-- SPLASH -->
-<div id="splash">
-  <div class="teddy">🧸❤️</div>
-  <h1>Welcome</h1>
-  <p>Loading...</p>
-  <small>Made by Sumit</small>
+<div id="splash" class="screen black">
+  <div class="center">
+    <div class="emoji">🧸❤️</div>
+    <h1>Welcome</h1>
+    <p>Loading...</p>
+    <small>Made by Sumit</small>
+  </div>
 </div>
 
 <!-- HOME -->
-<div id="home" class="hidden">
-  <header>
-    <span class="menu" onclick="toggleMenu()">⋮</span>
-    <h2>Welcome</h2>
-  </header>
-
-  <div id="menu" class="hidden">
-    <h4>Saved Wishes</h4>
-    <ul id="savedList"></ul>
+<div id="home" class="screen white hidden">
+  <div class="topbar">
+    <span class="logo">WishHeart</span>
+    <span id="menuBtn">⋮</span>
   </div>
 
-  <button class="new-btn" onclick="openCreator()">＋ New Project</button>
+  <div id="menu" class="menu hidden"></div>
+
+  <h2>Welcome</h2>
+  <button id="newProject">＋ New Project</button>
 </div>
 
-<!-- CREATOR -->
-<div id="creator" class="hidden">
-  <h3>Choose Your Category</h3>
-  <button onclick="selectCategory('newyear')">🎆 New Year</button>
+<!-- CREATE -->
+<div id="create" class="screen white hidden">
+  <h2>Choose Your Category</h2>
+  <button onclick="selectCategory('newyear')">🎉 New Year</button>
   <button onclick="selectCategory('birthday')">🎂 Birthday</button>
 
-  <input id="toName" placeholder="Name of the person">
-  <input id="fromName" placeholder="Your Name">
-  <textarea id="message" placeholder="Write description"></textarea>
-  <input type="file" id="photo">
-  <input id="password" placeholder="Set Password">
-
-  <button onclick="generateLink()">Generate Link</button>
-  <p id="linkBox"></p>
+  <div id="form" class="hidden">
+    <input id="toName" placeholder="Name of the person">
+    <input id="fromName" placeholder="Your Name">
+    <textarea id="message" placeholder="Write description"></textarea>
+    <input type="file" id="photo">
+    <input id="password" placeholder="Set Password">
+    <button onclick="generateLink()">Generate Link</button>
+    <p id="linkBox"></p>
+  </div>
 </div>
 
-<!-- VIEW -->
-<div id="viewer" class="hidden">
-  <div id="passwordScreen">
-    <input id="viewPass" placeholder="Enter Password">
-    <button onclick="unlockWish()">Unlock</button>
-  </div>
+<!-- PASSWORD -->
+<div id="unlock" class="screen white hidden">
+  <h2>Enter Password</h2>
+  <input id="unlockPass" placeholder="Password">
+  <button onclick="unlock()">Unlock</button>
+</div>
 
-  <div id="wishScreen" class="hidden">
-    <canvas id="fireworks"></canvas>
-    <div class="wishBox">
-      <h1 id="wishTitle"></h1>
-      <p id="wishMsg"></p>
-      <img id="wishImg">
-      <p id="wishFrom"></p>
-    </div>
+<!-- WISH -->
+<div id="wish" class="screen black hidden">
+  <div class="floating"></div>
+  <div class="card">
+    <h1 id="wishTitle"></h1>
+    <p id="wishMsg"></p>
+    <img id="wishImg">
+    <p class="by"></p>
+    <button onclick="showNotebook()">Next</button>
   </div>
+</div>
+
+<!-- NOTEBOOK -->
+<div id="note" class="screen white hidden">
+  <div class="notebook">
+    <h3>Dear ❤️</h3>
+    <p id="noteText"></p>
+  </div>
+  <button onclick="showGift()">Next</button>
+</div>
+
+<!-- GIFT -->
+<div id="gift" class="screen white hidden">
+  <div class="gift">🌹 🍫</div>
+  <h3>It's for you dear</h3>
 </div>
 
 <script src="script.js"></script>
