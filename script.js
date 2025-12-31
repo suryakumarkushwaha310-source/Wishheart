@@ -1,35 +1,32 @@
-let type = "";
+let data = {};
 
 setTimeout(() => {
   splash.classList.add("hidden");
   home.classList.remove("hidden");
 }, 5000);
 
-function openCategory() {
-  hideAll();
-  category.classList.remove("hidden");
-}
-
-function openForm(t) {
-  type = t;
-  hideAll();
+function openForm() {
+  home.classList.add("hidden");
   form.classList.remove("hidden");
 }
 
 function generate() {
-  hideAll();
-  wish.classList.remove("hidden");
-
-  title.innerText =
-    type === "newyear"
-      ? "Happy New Year " + toName.value
-      : "Happy Birthday " + toName.value;
-
-  by.innerText = "By " + fromName.value;
-  text.innerText = msg.value;
+  data.to = to.value;
+  data.from = from.value;
+  data.msg = msg.value;
+  data.pass = pass.value;
+  form.classList.add("hidden");
+  lock.classList.remove("hidden");
 }
 
-function hideAll() {
-  document.querySelectorAll("body > div")
-    .forEach(d => d.classList.add("hidden"));
+function unlock() {
+  if (check.value === data.pass) {
+    lock.classList.add("hidden");
+    wish.classList.remove("hidden");
+    title.innerText = "Happy New Year " + data.to;
+    by.innerText = "By " + data.from;
+    text.innerText = data.msg;
+  } else {
+    alert("Wrong password");
+  }
 }
