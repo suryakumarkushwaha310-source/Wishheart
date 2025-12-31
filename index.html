@@ -10,42 +10,48 @@
 <!-- SPLASH -->
 <div id="splash" class="screen active">
   <div class="center">
-    <div class="teddy">🧸</div>
-    <h2>Welcome</h2>
+    🧸
+    <h1>Welcome</h1>
     <p>Loading...</p>
+    <small>Made by Sumit</small>
   </div>
+</div>
+
+<!-- HOLD HEART -->
+<div id="hold" class="screen">
+  <div id="heart">❤️</div>
+  <p>Hold for 5 seconds</p>
+</div>
+
+<!-- PASSWORD -->
+<div id="password" class="screen">
+  <h2>Enter Password</h2>
+  <input type="password" id="passInput" placeholder="Password">
+  <button onclick="checkPassword()">Unlock</button>
 </div>
 
 <!-- FORM -->
 <div id="form" class="screen">
-  <h2>Create Your Wish 💖</h2>
-
+  <h2>Create Wish</h2>
   <input id="toName" placeholder="To Name">
   <input id="fromName" placeholder="From Name">
   <textarea id="message" placeholder="Your Message"></textarea>
-
-  <input type="file" id="photo" accept="image/*">
-  <input id="password" placeholder="Set Password">
-
-  <button onclick="startWish()">Generate Wish</button>
+  <input type="file" id="photo">
+  <button onclick="generateWish()">Generate</button>
 </div>
 
-<!-- HOLD -->
-<div id="hold" class="screen">
-  <div class="heart">❤️</div>
-  <p>Hold for 5 seconds</p>
-</div>
-
-<!-- WISH -->
-<div id="wish" class="screen">
-  <h2 id="wishTitle"></h2>
-  <img id="wishPhoto">
-  <div class="notebook">
-    <p id="wishMsg"></p>
+<!-- NOTEBOOK -->
+<div id="wish" class="screen notebook">
+  <div class="page">
+    <h2 id="toShow"></h2>
+    <p id="msgShow"></p>
+    <h4 id="fromShow"></h4>
+    <img id="imgShow">
+    <button onclick="share()">Share ❤️</button>
   </div>
-
-  <button onclick="shareWish()">Share 🔗</button>
 </div>
+
+<canvas id="fireworks"></canvas>
 
 <script src="script.js"></script>
 </body>
