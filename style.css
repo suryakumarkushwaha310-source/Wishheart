@@ -1,66 +1,56 @@
 body {
   margin: 0;
   font-family: Arial;
-  background: #fff;
+  text-align: center;
 }
 
-.screen { display: none; padding: 20px; }
+.hidden { display: none; }
 
 #splash {
   background: black;
   color: white;
   height: 100vh;
-  text-align: center;
   padding-top: 30%;
 }
 
-.teddy { width: 120px; }
+.teddy { font-size: 80px; }
+.heart { font-size: 30px; color: pink; }
 
-.heart {
-  font-size: 24px;
-  margin: 10px;
-}
-
-header {
-  display: flex;
-  justify-content: space-between;
-}
-
-#menu {
-  display: none;
-  background: #eee;
-  padding: 10px;
-}
-
-.center {
-  text-align: center;
-  margin-top: 40%;
+#home, #form, #lock {
+  padding: 20px;
 }
 
 button {
   padding: 10px 20px;
-  margin: 10px;
+  background: pink;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
 }
 
-.dark {
-  background: #12002b;
-  color: pink;
+input, textarea, select {
+  width: 90%;
+  padding: 10px;
+  margin: 8px 0;
+}
+
+#wish {
+  background: black;
+  color: white;
   height: 100vh;
-  text-align: center;
+  padding-top: 40px;
 }
 
-#holdHeart {
-  font-size: 80px;
-  margin-top: 40%;
+#wish img {
+  width: 200px;
+  border-radius: 10px;
 }
 
-#wishPhoto {
-  max-width: 200px;
-  margin: 10px;
+.fireworks::after {
+  content: "✨✨✨";
+  animation: blink 1s infinite;
 }
 
-.book {
-  font-size: 24px;
-  padding: 40px;
-  border: 2px solid pink;
+@keyframes blink {
+  50% { opacity: 0; }
 }
