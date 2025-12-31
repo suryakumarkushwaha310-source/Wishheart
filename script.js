@@ -1,116 +1,85 @@
-let data = {};
+let appData = {};
 let holdTimer;
 
 setTimeout(() => {
   splash.style.display = "none";
-  home.classList.remove("hidden");
+  home.style.display = "block";
 }, 5000);
 
-function toggleMenu() {
-  let m = document.getElementById("menu");
-  m.classList.toggle("hidden");
-  m.innerHTML = localStorage.getItem("saved") || "No saved links";
+menuBtn.onclick = () => {
+  menu.style.display = menu.style.display === "block" ? "none" : "block";
+};
+
+function openCategory() {
+  home.style.display = "none";
+  category.style.display = "block";
 }
 
-function openCreator() {
-  home.classList.add("hidden");
-  creator.classList.remove("hidden");
-}
-
-function startForm(type) {
-  data.type = type;
-  creator.classList.add("hidden");
-  form.classList.remove("hidden");
+function openForm(type) {
+  appData.type = type;
+  category.style.display = "none";
+  form.style.display = "block";
 }
 
 function generateWish() {
-  data.to = toName.value;
-  data.from = fromName.value;
-  data.msg = message.value;
-  data.pass = password.value;
+  appData.to = toName.value;
+  appData.from = fromName.value;
+  appData.msg = message.value;
+  appData.pass = password.value;
 
   let file = photo.files[0];
   if (file) {
     let reader = new FileReader();
-    reader.onload = () => {
-      data.photo = reader.result;
-      saveAndOpen();
-    };
+    reader.onload = () => appData.photo = reader.result;
     reader.readAsDataURL(file);
-  } else {
-    saveAndOpen();
   }
+
+  localStorage.setItem("wishData", JSON.stringify(appData));
+  alert("Link Generated! Share this page.");
+  location.reload();
 }
 
-function saveAndOpen() {
-  localStorage.setItem("wish", JSON.stringify(data));
-  form.classList.add("hidden");
-  passwordScreen.classList.remove("hidden");
+let saved = JSON.parse(localStorage.getItem("wishData"));
+if (saved) {
+  passwordScreen.style.display = "block";
 }
 
 function checkPassword() {
-  let d = JSON.parse(localStorage.getItem("wish"));
-  if (passInput.value === d.pass) {
-    passwordScreen.classList.add("hidden");
-    holdScreen.classList.remove("hidden");
-  } else alert("Wrong password");
+  if (passInput.value === saved.pass) {
+    passwordScreen.style.display = "none";
+    hold.style.display = "block";
+    startHold();
+  } else alert("Wrong Password");
 }
 
-function holdStart() {
-  holdTimer = setTimeout(() => {
-    holdScreen.classList.add("hidden");
-    showWish();
-  }, 5000);
-}
-
-function holdEnd() {
-  clearTimeout(holdTimer);
+function startHold() {
+  holdHeart.onmousedown = () => {
+    holdTimer = setTimeout(showWish, 5000);
+  };
+  holdHeart.onmouseup = () => clearTimeout(holdTimer);
 }
 
 function showWish() {
-  let d = JSON.parse(localStorage.getItem("wish"));
+  hold.style.display = "none";
+  wish.style.display = "block";
+
   wishTitle.innerText =
-    (d.type === "birthday" ? "Happy Birthday " : "Happy New Year ") + d.to;
-  wishMsg.innerText = d.msg;
-  if (d.photo) wishPhoto.src = d.photo;
-  wish.classList.remove("hidden");
-  firework();
+    (saved.type === "birthday" ? "Happy Birthday " : "Happy New Year ") + saved.to;
+
+  if (saved.photo) wishPhoto.src = saved.photo;
+  wishFrom.innerText = "By " + saved.from;
 }
 
-function showNotebook() {
-  wish.classList.add("hidden");
-  notebook.classList.remove("hidden");
+function openNotebook() {
+  wish.style.display = "none";
+  notebook.style.display = "block";
 }
 
-function openNote() {
-  notebook.classList.add("hidden");
-  noteText.classList.remove("hidden");
-  noteMsg.innerText = JSON.parse(localStorage.getItem("wish")).msg;
-}
-
-function finalScreen() {
-  noteText.classList.add("hidden");
-  final.classList.remove("hidden");
+function openBook() {
+  noteText.innerText = saved.msg;
 }
 
 function saveWish() {
-  let old = localStorage.getItem("saved") || "";
-  localStorage.setItem("saved", old + "<br>Saved Wish");
-  alert("Saved in menu");
-}
-
-function firework() {
-  let c = fireworks;
-  let ctx = c.getContext("2d");
-  c.width = window.innerWidth;
-  c.height = window.innerHeight;
-  for (let i = 0; i < 50; i++) {
-    ctx.fillStyle = "pink";
-    ctx.fillRect(
-      Math.random() * c.width,
-      Math.random() * c.height,
-      4,
-      4
-    );
-  }
+  alert("Saved in menu!");
+  location.reload();
 }
