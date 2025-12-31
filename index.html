@@ -1,54 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>WishHeart</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>WishHeart</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <!-- SPLASH -->
 <div id="splash">
-  🧸
-  <div class="heart">❤️</div>
+  <img src="https://i.imgur.com/QZ6QZ6C.png" class="teddy">
   <h2>Welcome</h2>
   <p>Loading...</p>
-  <small>Made by Sumit</small>
+  <span>Made by Sumit</span>
 </div>
 
-<!-- APP -->
-<div id="app" class="hidden">
+<!-- HOME -->
+<div id="home" class="hide">
+  <div class="top">
+    <h1>Welcome</h1>
+    <button onclick="showSaved()">⋮</button>
+  </div>
+  <button class="new" onclick="openCategory()">＋ New Project</button>
+</div>
 
-  <!-- HOME -->
-  <section id="home">
-    <h1>💖 WishHeart</h1>
-    <button onclick="goForm()">Create Wish</button>
-  </section>
+<!-- CATEGORY -->
+<div id="category" class="hide">
+  <h2>Choose Your Category</h2>
+  <button onclick="openForm('newyear')">🎆 New Year</button>
+  <button onclick="openForm('birthday')">🎂 Birthday</button>
+</div>
 
-  <!-- FORM -->
-  <section id="form" class="hidden">
-    <input id="toName" placeholder="To Name">
-    <input id="fromName" placeholder="From Name">
-    <textarea id="message" placeholder="Your Message"></textarea>
-    <input id="password" placeholder="Set Password">
-    <button onclick="generateWish()">Generate Wish</button>
-  </section>
+<!-- FORM -->
+<div id="form" class="hide">
+  <input id="toName" placeholder="Name of person">
+  <input id="fromName" placeholder="Your name">
+  <textarea id="message" placeholder="Write message"></textarea>
+  <input type="file" id="photo">
+  <input id="password" placeholder="Set Password">
+  <button onclick="generate()">Generate Link</button>
+</div>
 
-  <!-- PASSWORD -->
-  <section id="lock" class="hidden">
-    <h2>🔒 Enter Password</h2>
-    <input id="unlockPass" placeholder="Password">
-    <button onclick="unlockWish()">Unlock</button>
-  </section>
+<!-- PASSWORD -->
+<div id="lock" class="hide">
+  <input id="unlockPass" placeholder="Enter Password">
+  <button onclick="unlock()">Unlock</button>
+</div>
 
-  <!-- WISH -->
-  <section id="wish" class="hidden">
-    <div class="fireworks"></div>
-    <h2 id="wishTitle"></h2>
+<!-- WISH -->
+<div id="wish" class="hide">
+  <div class="hearts"></div>
+  <div class="box">
+    <h1 id="wishTitle"></h1>
+    <img id="wishImg">
     <p id="wishMsg"></p>
-    <button onclick="shareWish()">🔗 Share Link</button>
-  </section>
-
+  </div>
 </div>
 
 <script src="script.js"></script>
