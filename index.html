@@ -3,28 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <title>WishHeart</title>
-
-  <!-- CSS -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Splash Screen -->
-  <div id="splash">
-    <div class="teddy">🧸</div>
-    <div class="heart">❤️</div>
-    <h2>Welcome</h2>
-    <p>Loading...</p>
-    <small>Made by Sumit</small>
-  </div>
+<!-- Splash Screen -->
+<div id="splash">
+  <div class="teddy">🧸</div>
+  <div class="heart">❤️</div>
+  <h2>Welcome</h2>
+  <p>Loading...</p>
+  <small>Made by Sumit</small>
+</div>
 
-  <!-- Home Screen -->
-  <div id="home" class="hidden">
-    <h1>💖 WishHeart</h1>
-    <button onclick="goCreate()">New Project</button>
-  </div>
+<!-- Home Screen -->
+<div id="home" class="hidden">
+  <h1>💖 WishHeart 💖</h1>
+  <button onclick="showForm()">Create New Wish</button>
+</div>
 
-  <!-- JS (VERY IMPORTANT – body ke END me) -->
-  <script src="script.js"></script>
+<!-- Form Screen -->
+<div id="form" class="hidden">
+  <input id="to" placeholder="To Name">
+  <input id="from" placeholder="From Name">
+  <textarea id="msg" placeholder="Your Message"></textarea>
+  <button onclick="generateWish()">Generate Wish</button>
+</div>
+
+<!-- Wish Screen -->
+<div id="wish" class="hidden">
+  <h2 id="wishText"></h2>
+  <button onclick="restart()">Create Another</button>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
