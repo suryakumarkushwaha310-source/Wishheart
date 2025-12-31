@@ -3,56 +3,233 @@
 <head>
 <meta charset="UTF-8">
 <title>WishHeart</title>
-<link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+body{
+  background:#000;
+  color:#fff;
+  overflow:hidden;
+  text-align:center;
+}
+
+/* common */
+.page{
+  display:none;
+  width:100vw;
+  height:100vh;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+}
+
+/* splash */
+#splash{
+  display:flex;
+}
+#splash h1{
+  margin-top:20px;
+  font-size:28px;
+}
+#splash p{
+  opacity:0.7;
+}
+.heart{
+  font-size:60px;
+  animation:pulse 1.2s infinite;
+}
+@keyframes pulse{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.2);}
+  100%{transform:scale(1);}
+}
+
+/* hold */
+#hold .heart{
+  font-size:80px;
+}
+.progress{
+  width:200px;
+  height:6px;
+  background:#333;
+  margin-top:20px;
+  border-radius:5px;
+  overflow:hidden;
+}
+.bar{
+  width:0%;
+  height:100%;
+  background:red;
+}
+
+/* form */
+input,textarea{
+  width:80%;
+  padding:10px;
+  margin:8px;
+  border:none;
+  border-radius:5px;
+}
+button{
+  padding:12px 20px;
+  background:red;
+  border:none;
+  color:#fff;
+  border-radius:5px;
+  margin-top:10px;
+  font-size:16px;
+}
+
+/* reveal */
+#reveal h2{
+  animation:fadeIn 2s;
+}
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(20px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+/* fireworks */
+.firework{
+  position:fixed;
+  width:6px;
+  height:6px;
+  background:red;
+  border-radius:50%;
+  animation:boom 1s forwards;
+}
+@keyframes boom{
+  to{
+    transform:translate(var(--x),var(--y));
+    opacity:0;
+  }
+}
+</style>
 </head>
+
 <body>
 
 <!-- SPLASH -->
-<div id="splash" class="screen active">
-  <div class="center">
-    🧸
-    <h1>Welcome</h1>
-    <p>Loading...</p>
-    <small>Made by Sumit</small>
-  </div>
+<div class="page" id="splash">
+  <div class="heart">🧸❤️</div>
+  <h1>Welcome</h1>
+  <p>Loading...</p>
+  <small>Made by Sumit</small>
 </div>
 
-<!-- HOLD HEART -->
-<div id="hold" class="screen">
-  <div id="heart">❤️</div>
-  <p>Hold for 5 seconds</p>
-</div>
-
-<!-- PASSWORD -->
-<div id="password" class="screen">
-  <h2>Enter Password</h2>
-  <input type="password" id="passInput" placeholder="Password">
-  <button onclick="checkPassword()">Unlock</button>
+<!-- HOLD -->
+<div class="page" id="hold">
+  <div class="heart">❤️</div>
+  <h2>Hold for 5 seconds</h2>
+  <div class="progress"><div class="bar"></div></div>
 </div>
 
 <!-- FORM -->
-<div id="form" class="screen">
+<div class="page" id="form">
   <h2>Create Wish</h2>
-  <input id="toName" placeholder="To Name">
-  <input id="fromName" placeholder="From Name">
-  <textarea id="message" placeholder="Your Message"></textarea>
+  <input id="to" placeholder="To Name">
+  <input id="from" placeholder="From Name">
+  <textarea id="msg" placeholder="Your Message"></textarea>
+  <input type="password" id="pass" placeholder="Set Password">
   <input type="file" id="photo">
-  <button onclick="generateWish()">Generate</button>
+  <button onclick="saveWish()">Create Wish</button>
 </div>
 
-<!-- NOTEBOOK -->
-<div id="wish" class="screen notebook">
-  <div class="page">
-    <h2 id="toShow"></h2>
-    <p id="msgShow"></p>
-    <h4 id="fromShow"></h4>
-    <img id="imgShow">
-    <button onclick="share()">Share ❤️</button>
-  </div>
+<!-- REVEAL -->
+<div class="page" id="lock">
+  <h2>Enter Password</h2>
+  <input type="password" id="unlockPass">
+  <button onclick="unlock()">Unlock</button>
 </div>
 
-<canvas id="fireworks"></canvas>
+<div class="page" id="reveal">
+  <h2 id="finalText"></h2>
+  <img id="finalImg" style="max-width:80%;margin-top:15px;border-radius:10px">
+  <br>
+  <button onclick="share()">Share Link</button>
+</div>
 
-<script src="script.js"></script>
+<script>
+let wish={};
+
+function show(id){
+  document.querySelectorAll('.page').forEach(p=>p.style.display="none");
+  document.getElementById(id).style.display="flex";
+}
+
+/* SPLASH → HOLD */
+show("splash");
+setTimeout(()=>show("hold"),5000);
+
+/* HOLD LOGIC */
+let bar=document.querySelector('.bar');
+let holdTime=0;
+let holdInterval=setInterval(()=>{
+  holdTime++;
+  bar.style.width=(holdTime*20)+"%";
+  if(holdTime>=5){
+    clearInterval(holdInterval);
+    show("form");
+  }
+},1000);
+
+/* SAVE */
+function saveWish(){
+  wish.to=to.value;
+  wish.from=from.value;
+  wish.msg=msg.value;
+  wish.pass=pass.value;
+
+  let file=photo.files[0];
+  if(file){
+    let reader=new FileReader();
+    reader.onload=()=>wish.img=reader.result;
+    reader.readAsDataURL(file);
+  }
+  show("lock");
+}
+
+/* UNLOCK */
+function unlock(){
+  if(unlockPass.value===wish.pass){
+    finalText.innerHTML=`❤️ ${wish.to}<br><br>${wish.msg}<br><br>— ${wish.from}`;
+    if(wish.img) finalImg.src=wish.img;
+    show("reveal");
+    fireworks();
+  }else{
+    alert("Wrong password");
+  }
+}
+
+/* SHARE */
+function share(){
+  navigator.share({
+    title:"WishHeart",
+    text:"Open my wish ❤️",
+    url:location.href
+  });
+}
+
+/* FIREWORKS */
+function fireworks(){
+  for(let i=0;i<30;i++){
+    let f=document.createElement("div");
+    f.className="firework";
+    f.style.left="50%";
+    f.style.top="50%";
+    f.style.setProperty("--x",(Math.random()*400-200)+"px");
+    f.style.setProperty("--y",(Math.random()*400-200)+"px");
+    document.body.appendChild(f);
+    setTimeout(()=>f.remove(),1000);
+  }
+}
+</script>
+
 </body>
 </html>
