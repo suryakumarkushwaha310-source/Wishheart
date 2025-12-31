@@ -1,0 +1,81 @@
+body {
+  margin: 0;
+  font-family: Arial;
+  text-align: center;
+}
+
+.hidden { display: none; }
+
+#splash {
+  background: black;
+  color: white;
+  height: 100vh;
+  padding-top: 100px;
+}
+
+.teddy {
+  width: 150px;
+}
+
+.loading {
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0.3; }
+}
+
+#home {
+  padding: 20px;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.newProject {
+  margin-top: 100px;
+  padding: 20px;
+  border: 2px dashed pink;
+  cursor: pointer;
+}
+
+#creator button,
+#form button,
+#passwordScreen button {
+  padding: 15px;
+  margin: 10px;
+}
+
+input, textarea {
+  width: 90%;
+  padding: 10px;
+  margin: 5px;
+}
+
+#heart {
+  font-size: 80px;
+  margin-top: 200px;
+  cursor: pointer;
+}
+
+#wish {
+  background: black;
+  color: pink;
+  min-height: 100vh;
+}
+
+#wishPhoto {
+  width: 200px;
+  border-radius: 10px;
+}
+
+#notebook {
+  font-size: 50px;
+  margin-top: 200px;
+}
+
+#final {
+  font-size: 30px;
+}
