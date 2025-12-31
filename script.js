@@ -1,120 +1,80 @@
-let data = {};
-let category = "";
+let data={}, category="";
 
-/* SPLASH */
-setTimeout(() => {
+setTimeout(()=>{
   splash.classList.add("hidden");
   home.classList.remove("hidden");
-  loadSaved();
-}, 5000);
+  loadMenu();
+},3000);
 
-/* MENU */
-function toggleMenu() {
-  menu.classList.toggle("hidden");
-}
-
-/* CREATOR */
-function openCreator() {
+newProject.onclick=()=>{
   home.classList.add("hidden");
-  creator.classList.remove("hidden");
-}
+  create.classList.remove("hidden");
+};
 
-function selectCategory(cat) {
-  category = cat;
-}
+menuBtn.onclick=()=>{
+  menu.classList.toggle("hidden");
+};
 
-function generateLink() {
-  if (!category) return alert("Select category");
-
-  const id = Date.now();
-  data = {
-    id,
-    category,
-    to: toName.value,
-    from: fromName.value,
-    msg: message.value,
-    pass: password.value
-  };
-
-  const file = photo.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = () => {
-      data.img = reader.result;
-      saveData();
-    };
-    reader.readAsDataURL(file);
-  } else {
-    saveData();
-  }
-}
-
-function saveData() {
-  localStorage.setItem("wish_" + data.id, JSON.stringify(data));
-  const link = location.origin + location.pathname + "?id=" + data.id;
-  linkBox.innerText = link;
-}
-
-/* LOAD SAVED */
-function loadSaved() {
-  savedList.innerHTML = "";
-  Object.keys(localStorage).forEach(k => {
-    if (k.startsWith("wish_")) {
-      const id = k.split("_")[1];
-      const li = document.createElement("li");
-      li.innerText = "Wish " + id;
-      li.onclick = () => openWish(id);
-      savedList.appendChild(li);
-    }
+function loadMenu(){
+  let list=JSON.parse(localStorage.getItem("links")||"[]");
+  menu.innerHTML="";
+  list.forEach(l=>{
+    let a=document.createElement("div");
+    a.textContent=l.title;
+    a.onclick=()=>location.href=l.url;
+    menu.appendChild(a);
   });
 }
 
-/* OPEN WISH */
-function openWish(id) {
-  data = JSON.parse(localStorage.getItem("wish_" + id));
+function selectCategory(c){
+  category=c;
+  form.classList.remove("hidden");
+}
+
+function generateLink(){
+  data={
+    category,
+    to:toName.value,
+    from:fromName.value,
+    msg:message.value,
+    pass:password.value
+  };
+  let id=btoa(JSON.stringify(data));
+  let url=location.origin+location.pathname+"#"+id;
+  linkBox.innerText=url;
+
+  let saved=JSON.parse(localStorage.getItem("links")||"[]");
+  saved.push({title:data.to,url});
+  localStorage.setItem("links",JSON.stringify(saved));
+}
+
+if(location.hash){
   home.classList.add("hidden");
-  viewer.classList.remove("hidden");
+  unlock.classList.remove("hidden");
+  data=JSON.parse(atob(location.hash.slice(1)));
 }
 
-/* PASSWORD */
-function unlockWish() {
-  if (viewPass.value !== data.pass) return alert("Wrong password");
+function unlock(){
+  if(unlockPass.value===data.pass){
+    unlock.classList.add("hidden");
+    wish.classList.remove("hidden");
 
-  passwordScreen.classList.add("hidden");
-  wishScreen.classList.remove("hidden");
+    wishTitle.innerText=
+      (data.category==="birthday"?"Happy Birthday ":"Happy New Year ")
+      +data.to;
 
-  wishTitle.innerText =
-    data.category === "birthday"
-      ? "🎂 Happy Birthday " + data.to
-      : "🎆 Happy New Year " + data.to;
-
-  wishMsg.innerText = data.msg;
-  wishFrom.innerText = "From: " + data.from;
-
-  if (data.img) wishImg.src = data.img;
-
-  startFireworks();
+    wishMsg.innerText=data.msg;
+    document.querySelector(".by").innerText="By "+data.from;
+  }else alert("Wrong password");
 }
 
-/* FIREWORKS */
-function startFireworks() {
-  const canvas = fireworks;
-  const ctx = canvas.getContext("2d");
-  canvas.width = innerWidth;
-  canvas.height = innerHeight;
-
-  setInterval(() => {
-    ctx.fillStyle = "rgba(0,0,0,0.2)";
-    ctx.fillRect(0,0,canvas.width,canvas.height);
-    ctx.fillStyle = "hsl(" + Math.random()*360 + ",100%,60%)";
-    ctx.beginPath();
-    ctx.arc(Math.random()*canvas.width, Math.random()*canvas.height, 4, 0, Math.PI*2);
-    ctx.fill();
-  }, 100);
+function showNotebook(){
+  wish.classList.add("hidden");
+  note.classList.remove("hidden");
+  noteText.innerText=data.msg;
 }
 
-/* AUTO OPEN FROM LINK */
-const params = new URLSearchParams(location.search);
-if (params.get("id")) {
-  openWish(params.get("id"));
-}
+function showGift(){
+  note.classList.add("hidden");
+  gift.classList.remove("hidden");
+    }
