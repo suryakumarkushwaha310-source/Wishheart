@@ -7,34 +7,36 @@
 </head>
 <body>
 
-<!-- Splash Screen -->
+<!-- SPLASH -->
 <div id="splash">
   <div class="teddy">🧸</div>
   <div class="heart">❤️</div>
-  <h2>Welcome</h2>
+  <h1>Welcome</h1>
   <p>Loading...</p>
   <small>Made by Sumit</small>
 </div>
 
-<!-- Home Screen -->
-<div id="home" class="hidden">
-  <h1>💖 WishHeart 💖</h1>
-  <button onclick="openForm()">New Project +</button>
+<!-- HOME -->
+<div id="home" class="hide">
+  <h2>WishHeart 💖</h2>
+  <button onclick="openForm()">Create New Wish</button>
 </div>
 
-<!-- Form Screen -->
-<div id="form" class="hidden">
-  <input id="toName" placeholder="To Name">
-  <input id="fromName" placeholder="From Name">
-  <textarea id="message" placeholder="Your Message"></textarea>
+<!-- FORM -->
+<div id="form" class="hide">
+  <input id="to" placeholder="To Name">
+  <input id="from" placeholder="From Name">
+  <textarea id="msg" placeholder="Your Message"></textarea>
   <button onclick="generateWish()">Generate Wish</button>
 </div>
 
-<!-- Wish Screen -->
-<div id="wish" class="hidden">
-  <div class="heartBig">❤️</div>
-  <h2 id="finalText"></h2>
-  <button onclick="restart()">Create New</button>
+<!-- WISH -->
+<div id="wish" class="hide">
+  <div class="card">
+    <h2 id="wishTo"></h2>
+    <p id="wishMsg"></p>
+    <h4 id="wishFrom"></h4>
+  </div>
 </div>
 
 <script src="script.js"></script>
