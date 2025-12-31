@@ -1,72 +1,58 @@
-* {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
-}
-
 body {
+  margin: 0;
+  font-family: Arial;
   background: black;
   color: white;
   text-align: center;
 }
 
-.hidden {
-  display: none;
-}
+.hide { display: none; }
 
-/* Splash */
 #splash {
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 10px;
-  font-size: 24px;
-  animation: fade 5s forwards;
 }
 
-.heart {
-  font-size: 40px;
-  animation: pulse 1s infinite;
+.teddy { width: 150px; margin: auto; }
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
 }
 
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.3); }
-  100% { transform: scale(1); }
-}
-
-@keyframes fade {
-  100% { opacity: 0; }
-}
-
-/* Sections */
-section {
+.new {
+  font-size: 22px;
   padding: 20px;
 }
 
 input, textarea {
   width: 90%;
   padding: 10px;
-  margin: 10px;
+  margin: 8px;
 }
 
 button {
-  padding: 10px 20px;
-  background: crimson;
-  color: white;
-  border: none;
-  border-radius: 20px;
+  padding: 12px 20px;
+  margin: 10px;
+  font-size: 18px;
 }
 
-/* Fireworks */
-.fireworks::before {
-  content: "🎆🎇✨🎆🎇";
-  font-size: 30px;
-  animation: fireworks 1s infinite;
+#wish {
+  background: radial-gradient(#2b0033, black);
+  height: 100vh;
 }
 
-@keyframes fireworks {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
+.box {
+  background: rgba(0,0,0,0.6);
+  margin: 50px;
+  padding: 20px;
+  border-radius: 15px;
 }
+
+#wishImg {
+  width: 80%;
+  border-radius: 15px;
+  }
