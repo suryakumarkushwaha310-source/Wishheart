@@ -1,80 +1,109 @@
-let data={}, category="";
+let wishData = {};
+let currentCategory = "";
 
-setTimeout(()=>{
-  splash.classList.add("hidden");
+setTimeout(() => {
+  splash.style.display = "none";
   home.classList.remove("hidden");
-  loadMenu();
-},3000);
+}, 5000);
 
-newProject.onclick=()=>{
-  home.classList.add("hidden");
-  create.classList.remove("hidden");
-};
-
-menuBtn.onclick=()=>{
+// MENU
+menuBtn.onclick = () => {
   menu.classList.toggle("hidden");
+  loadSaved();
 };
 
-function loadMenu(){
-  let list=JSON.parse(localStorage.getItem("links")||"[]");
-  menu.innerHTML="";
-  list.forEach(l=>{
-    let a=document.createElement("div");
-    a.textContent=l.title;
-    a.onclick=()=>location.href=l.url;
-    menu.appendChild(a);
-  });
-}
+newProject.onclick = () => {
+  home.classList.add("hidden");
+  category.classList.remove("hidden");
+};
 
-function selectCategory(c){
-  category=c;
+function selectCategory(cat) {
+  currentCategory = cat;
+  category.classList.add("hidden");
   form.classList.remove("hidden");
 }
 
-function generateLink(){
-  data={
-    category,
-    to:toName.value,
-    from:fromName.value,
-    msg:message.value,
-    pass:password.value
+function generateLink() {
+  wishData = {
+    to: toName.value,
+    from: fromName.value,
+    msg: message.value,
+    pass: password.value,
+    cat: currentCategory,
+    photo: ""
   };
-  let id=btoa(JSON.stringify(data));
-  let url=location.origin+location.pathname+"#"+id;
-  linkBox.innerText=url;
 
-  let saved=JSON.parse(localStorage.getItem("links")||"[]");
-  saved.push({title:data.to,url});
-  localStorage.setItem("links",JSON.stringify(saved));
+  let file = photo.files[0];
+  if (file) {
+    let reader = new FileReader();
+    reader.onload = () => wishData.photo = reader.result;
+    reader.readAsDataURL(file);
+  }
+
+  let code = btoa(JSON.stringify(wishData));
+  let link = location.href.split("?")[0] + "?wish=" + code;
+
+  navigator.share
+    ? navigator.share({ url: link })
+    : alert("Copy link:\n" + link);
+
+  alert("Link Generated & Shareable");
 }
 
-if(location.hash){
+if (location.search.includes("wish=")) {
   home.classList.add("hidden");
-  unlock.classList.remove("hidden");
-  data=JSON.parse(atob(location.hash.slice(1)));
+  lock.classList.remove("hidden");
+
+  let data = atob(location.search.split("wish=")[1]);
+  wishData = JSON.parse(data);
 }
 
-function unlock(){
-  if(unlockPass.value===data.pass){
-    unlock.classList.add("hidden");
-    wish.classList.remove("hidden");
-
-    wishTitle.innerText=
-      (data.category==="birthday"?"Happy Birthday ":"Happy New Year ")
-      +data.to;
-
-    wishMsg.innerText=data.msg;
-    document.querySelector(".by").innerText="By "+data.from;
-  }else alert("Wrong password");
+function unlockWish() {
+  if (unlockPass.value === wishData.pass) {
+    lock.classList.add("hidden");
+    showWish();
+  } else alert("Wrong password");
 }
 
-function showNotebook(){
+function showWish() {
+  wish.classList.remove("hidden");
+  wishTitle.innerText =
+    wishData.cat === "birthday"
+      ? "Happy Birthday " + wishData.to
+      : "Happy New Year " + wishData.to;
+
+  wishFrom.innerText = "By " + wishData.from;
+  if (wishData.photo) wishPhoto.src = wishData.photo;
+}
+
+function openNotebook() {
   wish.classList.add("hidden");
-  note.classList.remove("hidden");
-  noteText.innerText=data.msg;
+  notebook.classList.remove("hidden");
 }
 
-function showGift(){
-  note.classList.add("hidden");
-  gift.classList.remove("hidden");
-    }
+function openNote() {
+  noteText.innerText = wishData.msg;
+  noteText.classList.remove("hidden");
+}
+
+function finalGift() {
+  notebook.classList.add("hidden");
+  final.classList.remove("hidden");
+}
+
+function saveWish() {
+  let arr = JSON.parse(localStorage.getItem("saved") || "[]");
+  arr.push(wishData);
+  localStorage.setItem("saved", JSON.stringify(arr));
+  alert("Saved!");
+}
+
+function loadSaved() {
+  savedList.innerHTML = "";
+  let arr = JSON.parse(localStorage.getItem("saved") || "[]");
+  arr.forEach((w, i) => {
+    let li = document.createElement("li");
+    li.innerText = w.to;
+    savedList.appendChild(li);
+  });
+}
