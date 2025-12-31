@@ -1,49 +1,61 @@
-let savedPassword = "";
-let wishData = {};
+let data = {};
 
 setTimeout(() => {
-  document.getElementById("splash").style.display = "none";
-  document.getElementById("app").classList.remove("hidden");
+  splash.style.display = "none";
+  home.classList.remove("hide");
 }, 5000);
 
-// Navigation
-function goForm() {
-  hideAll();
-  document.getElementById("form").classList.remove("hidden");
+function openCategory() {
+  home.classList.add("hide");
+  category.classList.remove("hide");
 }
 
-function generateWish() {
-  wishData = {
-    to: toName.value,
-    from: fromName.value,
-    msg: message.value
-  };
-  savedPassword = password.value;
-
-  hideAll();
-  document.getElementById("lock").classList.remove("hidden");
+function openForm(type) {
+  data.type = type;
+  category.classList.add("hide");
+  form.classList.remove("hide");
 }
 
-function unlockWish() {
-  if (unlockPass.value === savedPassword) {
-    hideAll();
-    document.getElementById("wish").classList.remove("hidden");
+function generate() {
+  data.to = toName.value;
+  data.from = fromName.value;
+  data.msg = message.value;
+  data.pass = password.value;
 
-    wishTitle.innerText = `Dear ${wishData.to} ❤️`;
-    wishMsg.innerText = wishData.msg + "\n\nFrom: " + wishData.from;
-  } else {
-    alert("Wrong Password");
-  }
+  let file = photo.files[0];
+  if (file) {
+    let reader = new FileReader();
+    reader.onload = () => {
+      data.img = reader.result;
+      save();
+    };
+    reader.readAsDataURL(file);
+  } else save();
 }
 
-function shareWish() {
-  navigator.share({
-    title: "WishHeart",
-    text: "Open my secret wish ❤️",
-    url: location.href
-  });
+function save() {
+  localStorage.setItem("wish", JSON.stringify(data));
+  alert("Link Generated & Saved");
+  showLock();
 }
 
-function hideAll() {
-  document.querySelectorAll("section").forEach(s => s.classList.add("hidden"));
+function showLock() {
+  form.classList.add("hide");
+  lock.classList.remove("hide");
+}
+
+function unlock() {
+  let saved = JSON.parse(localStorage.getItem("wish"));
+  if (unlockPass.value === saved.pass) {
+    lock.classList.add("hide");
+    showWish(saved);
+  } else alert("Wrong Password");
+}
+
+function showWish(d) {
+  wish.classList.remove("hide");
+  wishTitle.innerText =
+    d.type === "birthday" ? "Happy Birthday " + d.to : "Happy New Year " + d.to;
+  wishMsg.innerText = d.msg + "\n— " + d.from;
+  if (d.img) wishImg.src = d.img;
 }
