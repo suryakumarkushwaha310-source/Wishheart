@@ -1,23 +1,49 @@
-// Splash auto move
-setTimeout(()=>{
-  document.getElementById("splash").classList.add("hide");
-  document.getElementById("home").classList.remove("hide");
-},5000);
+let savedPassword = "";
+let wishData = {};
 
-function openForm(){
-  document.getElementById("home").classList.add("hide");
-  document.getElementById("form").classList.remove("hide");
+setTimeout(() => {
+  document.getElementById("splash").style.display = "none";
+  document.getElementById("app").classList.remove("hidden");
+}, 5000);
+
+// Navigation
+function goForm() {
+  hideAll();
+  document.getElementById("form").classList.remove("hidden");
 }
 
-function generateWish(){
-  let to = document.getElementById("to").value;
-  let from = document.getElementById("from").value;
-  let msg = document.getElementById("msg").value;
+function generateWish() {
+  wishData = {
+    to: toName.value,
+    from: fromName.value,
+    msg: message.value
+  };
+  savedPassword = password.value;
 
-  document.getElementById("wishTo").innerText = "Dear " + to;
-  document.getElementById("wishMsg").innerText = msg;
-  document.getElementById("wishFrom").innerText = "From " + from;
+  hideAll();
+  document.getElementById("lock").classList.remove("hidden");
+}
 
-  document.getElementById("form").classList.add("hide");
-  document.getElementById("wish").classList.remove("hide");
+function unlockWish() {
+  if (unlockPass.value === savedPassword) {
+    hideAll();
+    document.getElementById("wish").classList.remove("hidden");
+
+    wishTitle.innerText = `Dear ${wishData.to} ❤️`;
+    wishMsg.innerText = wishData.msg + "\n\nFrom: " + wishData.from;
+  } else {
+    alert("Wrong Password");
+  }
+}
+
+function shareWish() {
+  navigator.share({
+    title: "WishHeart",
+    text: "Open my secret wish ❤️",
+    url: location.href
+  });
+}
+
+function hideAll() {
+  document.querySelectorAll("section").forEach(s => s.classList.add("hidden"));
 }
