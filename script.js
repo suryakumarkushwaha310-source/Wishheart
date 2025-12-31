@@ -1,72 +1,60 @@
 let holdTimer;
-let wishData;
+let holdDone = false;
 
-setTimeout(() => {
-  splash.style.display = "none";
-  home.classList.remove("hidden");
-}, 5000);
+const heart = document.getElementById("heart");
+const passwordBox = document.getElementById("passwordBox");
+const firework = document.getElementById("firework");
+const photoScreen = document.getElementById("photoScreen");
+const noteScreen = document.getElementById("noteScreen");
 
-function openForm() {
-  home.classList.add("hidden");
-  form.classList.remove("hidden");
-}
+// HOLD HEART
+heart.addEventListener("mousedown", startHold);
+heart.addEventListener("touchstart", startHold);
 
-function generateWish() {
-  wishData = {
-    cat: category.value,
-    to: toName.value,
-    from: fromName.value,
-    msg: message.value,
-    pass: password.value,
-    photo: ""
-  };
-
-  const file = photo.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = () => wishData.photo = reader.result;
-    reader.readAsDataURL(file);
-  }
-
-  localStorage.setItem("wish", JSON.stringify(wishData));
-
-  form.classList.add("hidden");
-  passwordScreen.classList.remove("hidden");
-}
-
-function checkPassword() {
-  const data = JSON.parse(localStorage.getItem("wish"));
-  if (enterPass.value === data.pass) {
-    passwordScreen.classList.add("hidden");
-    wish.classList.remove("hidden");
-  } else {
-    alert("Wrong password");
-  }
-}
+heart.addEventListener("mouseup", cancelHold);
+heart.addEventListener("mouseleave", cancelHold);
+heart.addEventListener("touchend", cancelHold);
 
 function startHold() {
   holdTimer = setTimeout(() => {
-    wish.classList.add("hidden");
-    notebook.classList.remove("hidden");
+    holdDone = true;
+    document.getElementById("holdScreen").style.display = "none";
+    passwordBox.style.display = "flex";
   }, 5000);
 }
 
-function stopHold() {
-  clearTimeout(holdTimer);
+function cancelHold() {
+  if (!holdDone) clearTimeout(holdTimer);
 }
 
-function openBook() {
-  const data = JSON.parse(localStorage.getItem("wish"));
-  notebook.classList.add("hidden");
-  finalMessage.classList.remove("hidden");
+// PASSWORD CHECK
+function unlockWish() {
+  const pass = document.getElementById("passwordInput").value;
+  if (pass === "1234") {
+    passwordBox.style.display = "none";
+    firework.style.display = "block";
 
-  finalTitle.innerText =
-    (data.cat === "birthday" ? "Happy Birthday " : "Happy New Year ") + data.to;
-
-  finalText.innerText = data.msg;
-  if (data.photo) finalPhoto.src = data.photo;
+    setTimeout(() => {
+      firework.style.display = "none";
+      photoScreen.style.display = "flex";
+    }, 3000);
+  } else {
+    alert("Wrong Password ❌");
+  }
 }
 
-function openSaved() {
-  alert("Saved wishes are auto-loaded");
-    }
+// NEXT TO NOTE
+function nextToNote() {
+  photoScreen.style.display = "none";
+  noteScreen.style.display = "flex";
+}
+
+// SHARE LINK
+function shareWish() {
+  const link = window.location.href;
+  navigator.share({
+    title: "WishHeart ❤️",
+    text: "Open my special wish 💌",
+    url: link
+  });
+}
