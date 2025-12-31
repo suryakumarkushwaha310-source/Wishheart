@@ -1,241 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>WishHeart</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
-body{background:black;color:white;overflow:hidden}
-
-/* Splash */
-#splash{
-position:fixed;inset:0;
-background:black;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-z-index:10;
-}
-#teddy{font-size:80px}
-#loading{margin-top:20px;animation:blink 1s infinite}
-@keyframes blink{50%{opacity:0.3}}
-
-/* Pages */
-.page{display:none;padding:20px}
-.active{display:block}
-
-/* Buttons */
-.btn{
-background:#ff4d6d;
-padding:14px;
-margin:10px 0;
-border:none;
-border-radius:12px;
-color:white;
-font-size:16px;
-width:100%;
-}
-
-/* Inputs */
-input,textarea{
-width:100%;
-padding:12px;
-margin:10px 0;
-border-radius:10px;
-border:none;
-}
-
-/* Heart Hold */
-#heart{
-width:120px;height:120px;
-background:red;
-clip-path:polygon(50% 80%,0 30%,25% 0,50% 25%,75% 0,100% 30%);
-margin:auto;
-}
-#progress{
-height:5px;background:pink;width:0%;
-margin-top:10px;
-}
-
-/* Animation */
-.hearts{
-position:absolute;
-width:100%;
-height:100%;
-overflow:hidden;
-z-index:-1;
-}
-.hearts span{
-position:absolute;
-color:pink;
-font-size:20px;
-animation:float 6s linear infinite;
-}
-@keyframes float{
-0%{bottom:-20px;opacity:0}
-50%{opacity:1}
-100%{bottom:100%;opacity:0}
-}
-
-/* Firework */
-.fire{
-position:absolute;
-width:6px;height:6px;
-background:red;
-border-radius:50%;
-animation:fire 1s ease-out forwards;
-}
-@keyframes fire{
-to{transform:scale(10);opacity:0}
-}
-</style>
+  <meta charset="UTF-8">
+  <title>WishHeart</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <!-- SPLASH -->
 <div id="splash">
-<div id="teddy">🧸❤️</div>
-<div id="loading">Loading...</div>
-<div style="margin-top:10px;font-size:12px;">Made by Sumit</div>
+  <div class="teddy">🧸❤️</div>
+  <h1>Welcome</h1>
+  <p>Loading...</p>
+  <small>Made by Sumit</small>
 </div>
 
 <!-- HOME -->
-<div id="home" class="page">
-<h2>Welcome</h2>
-<button class="btn" onclick="show('create')">➕ New Project</button>
+<div id="home" class="hidden">
+  <header>
+    <span class="menu" onclick="toggleMenu()">⋮</span>
+    <h2>Welcome</h2>
+  </header>
+
+  <div id="menu" class="hidden">
+    <h4>Saved Wishes</h4>
+    <ul id="savedList"></ul>
+  </div>
+
+  <button class="new-btn" onclick="openCreator()">＋ New Project</button>
 </div>
 
-<!-- CREATE -->
-<div id="create" class="page">
-<h3>Choose Category</h3>
-<button class="btn" onclick="setType('New Year')">🎆 New Year</button>
-<button class="btn" onclick="setType('Birthday')">🎂 Birthday</button>
+<!-- CREATOR -->
+<div id="creator" class="hidden">
+  <h3>Choose Your Category</h3>
+  <button onclick="selectCategory('newyear')">🎆 New Year</button>
+  <button onclick="selectCategory('birthday')">🎂 Birthday</button>
+
+  <input id="toName" placeholder="Name of the person">
+  <input id="fromName" placeholder="Your Name">
+  <textarea id="message" placeholder="Write description"></textarea>
+  <input type="file" id="photo">
+  <input id="password" placeholder="Set Password">
+
+  <button onclick="generateLink()">Generate Link</button>
+  <p id="linkBox"></p>
 </div>
 
-<!-- FORM -->
-<div id="form" class="page">
-<h3>Create Wish</h3>
-<input id="toName" placeholder="Name to wish">
-<input id="fromName" placeholder="Your name">
-<textarea id="msg" placeholder="Write message"></textarea>
-<input type="file" id="photo">
-<input id="pass" placeholder="Set password">
-<button class="btn" onclick="generate()">Generate Wish</button>
+<!-- VIEW -->
+<div id="viewer" class="hidden">
+  <div id="passwordScreen">
+    <input id="viewPass" placeholder="Enter Password">
+    <button onclick="unlockWish()">Unlock</button>
+  </div>
+
+  <div id="wishScreen" class="hidden">
+    <canvas id="fireworks"></canvas>
+    <div class="wishBox">
+      <h1 id="wishTitle"></h1>
+      <p id="wishMsg"></p>
+      <img id="wishImg">
+      <p id="wishFrom"></p>
+    </div>
+  </div>
 </div>
 
-<!-- PASSWORD -->
-<div id="lock" class="page">
-<h3>Enter Password</h3>
-<input id="checkPass">
-<button class="btn" onclick="unlock()">Unlock</button>
-</div>
-
-<!-- HEART HOLD -->
-<div id="hold" class="page">
-<div class="hearts" id="bg"></div>
-<h3>Hold Heart for 5 Seconds</h3>
-<div id="heart"></div>
-<div id="progress"></div>
-</div>
-
-<!-- WISH -->
-<div id="wish" class="page">
-<h2 id="title"></h2>
-<img id="img" style="width:80%;border-radius:12px">
-<p id="finalMsg"></p>
-<button class="btn" onclick="share()">Share</button>
-</div>
-
-<script>
-let data={},timer,hold=0;
-
-setTimeout(()=>{
-document.getElementById("splash").style.display="none";
-show("home");
-},5000);
-
-function show(id){
-document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-document.getElementById(id).classList.add('active');
-}
-
-function setType(t){data.type=t;show('form')}
-
-function generate(){
-data.to=toName.value;
-data.from=fromName.value;
-data.msg=msg.value;
-data.pass=pass.value;
-let file=photo.files[0];
-if(file){
-let r=new FileReader();
-r.onload=e=>data.img=e.target.result;
-r.readAsDataURL(file);
-}
-localStorage.setItem("wish",JSON.stringify(data));
-show("lock");
-}
-
-function unlock(){
-let d=JSON.parse(localStorage.getItem("wish"));
-if(checkPass.value===d.pass){
-data=d;show('hold');startBG();
-}
-}
-
-heart.addEventListener("mousedown",()=>{
-timer=setInterval(()=>{
-hold+=1;
-progress.style.width=(hold*20)+"%";
-if(hold>=5){
-clearInterval(timer);
-reveal();
-}
-},1000);
-});
-heart.addEventListener("mouseup",()=>{clearInterval(timer);hold=0;progress.style.width="0%"});
-
-function reveal(){
-show('wish');
-title.innerText=`Happy ${data.type} ${data.to}`;
-finalMsg.innerText=`${data.msg}\n\n— ${data.from}`;
-if(data.img)img.src=data.img;
-firework();
-}
-
-function firework(){
-for(let i=0;i<20;i++){
-let f=document.createElement("div");
-f.className="fire";
-f.style.left=Math.random()*100+"%";
-f.style.top=Math.random()*100+"%";
-document.body.appendChild(f);
-setTimeout(()=>f.remove(),1000);
-}
-}
-
-function startBG(){
-for(let i=0;i<20;i++){
-let s=document.createElement("span");
-s.innerText="❤";
-s.style.left=Math.random()*100+"%";
-s.style.animationDelay=Math.random()*5+"s";
-bg.appendChild(s);
-}
-}
-
-function share(){
-navigator.share({
-title:"WishHeart",
-text:"Open my wish",
-url:location.href
-});
-}
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
