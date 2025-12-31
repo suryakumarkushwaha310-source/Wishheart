@@ -1,71 +1,78 @@
-* { box-sizing: border-box; font-family: Arial, sans-serif; }
+*{box-sizing:border-box;font-family:Arial}
+body{margin:0}
 
-body {
-  margin: 0;
-  background: #000;
-  color: #fff;
-  text-align: center;
+.screen{
+  min-height:100vh;
+  padding:20px;
 }
 
-/* SPLASH */
-#splash {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.teddy { font-size: 60px; animation: pulse 1s infinite; }
+.black{background:#000;color:#fff}
+.white{background:#fff;color:#000}
+.hidden{display:none}
 
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.2); }
-}
+.center{text-align:center;margin-top:30vh}
+.emoji{font-size:50px}
 
-/* HIDDEN */
-.hidden { display: none; }
-
-/* HOME */
-header {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  font-size:20px;
 }
 
-.menu { cursor: pointer; font-size: 22px; }
-
-#menu {
-  background: #111;
-  padding: 10px;
+button{
+  padding:12px;
+  width:100%;
+  margin:10px 0;
+  font-size:16px;
 }
 
-.new-btn {
-  margin-top: 50px;
-  padding: 15px;
-  font-size: 18px;
+input,textarea{
+  width:100%;
+  padding:10px;
+  margin:8px 0;
 }
 
-/* CREATOR */
-#creator input, textarea {
-  width: 90%;
-  margin: 8px;
-  padding: 10px;
+.menu{
+  position:absolute;
+  top:50px;
+  right:10px;
+  background:#eee;
+  padding:10px;
 }
 
-/* VIEW */
-#wishScreen {
-  position: relative;
-  height: 100vh;
+.card{
+  background:#111;
+  padding:20px;
+  margin-top:20vh;
+  border-radius:10px;
+  text-align:center;
 }
 
-#wishBox, .wishBox {
-  background: rgba(0,0,0,0.6);
-  padding: 20px;
-  margin: auto;
-  position: relative;
-  top: 30%;
+.card img{
+  max-width:100%;
+  margin:10px 0;
 }
 
-#wishImg {
-  max-width: 80%;
-  margin-top: 10px;
+.floating::before{
+  content:"❤️ ❤️ ❤️ ❤️ ❤️";
+  animation:float 6s infinite linear;
+  display:block;
+  text-align:center;
+}
+
+@keyframes float{
+  0%{opacity:0}
+  50%{opacity:1}
+  100%{opacity:0}
+}
+
+.notebook{
+  border:2px solid #ccc;
+  padding:20px;
+  background:#fdf3e7;
+}
+
+.gift{
+  font-size:40px;
+  text-align:center;
 }
