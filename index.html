@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>WishHeart</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>WishHeart</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -19,21 +19,22 @@
 <!-- Home Screen -->
 <div id="home" class="hidden">
   <h1>💖 WishHeart 💖</h1>
-  <button onclick="showForm()">Create New Wish</button>
+  <button onclick="openForm()">New Project +</button>
 </div>
 
 <!-- Form Screen -->
 <div id="form" class="hidden">
-  <input id="to" placeholder="To Name">
-  <input id="from" placeholder="From Name">
-  <textarea id="msg" placeholder="Your Message"></textarea>
+  <input id="toName" placeholder="To Name">
+  <input id="fromName" placeholder="From Name">
+  <textarea id="message" placeholder="Your Message"></textarea>
   <button onclick="generateWish()">Generate Wish</button>
 </div>
 
 <!-- Wish Screen -->
 <div id="wish" class="hidden">
-  <h2 id="wishText"></h2>
-  <button onclick="restart()">Create Another</button>
+  <div class="heartBig">❤️</div>
+  <h2 id="finalText"></h2>
+  <button onclick="restart()">Create New</button>
 </div>
 
 <script src="script.js"></script>
