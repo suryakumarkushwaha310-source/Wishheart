@@ -1,49 +1,69 @@
+let current = "splash";
+const screens = ["splash","hold","password","form","wish"];
+
 function show(id){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
+  screens.forEach(s=>document.getElementById(s).classList.remove("active"));
+  document.getElementById(id).classList.add("active");
 }
 
-// Splash → Form
-setTimeout(()=>show("form"),5000);
+// SPLASH → HOLD
+setTimeout(()=>show("hold"),5000);
 
-let savedData={};
+// HOLD LOGIC
+let holdTimer;
+document.getElementById("heart").addEventListener("touchstart",()=>{
+  holdTimer = setTimeout(()=>show("password"),5000);
+});
+document.getElementById("heart").addEventListener("touchend",()=>{
+  clearTimeout(holdTimer);
+});
 
-function startWish(){
-  savedData.to = toName.value;
-  savedData.from = fromName.value;
-  savedData.msg = message.value;
-  savedData.pass = password.value;
+// PASSWORD
+function checkPassword(){
+  if(document.getElementById("passInput").value==="1234"){
+    show("form");
+  } else alert("Wrong Password");
+}
 
-  let file = photo.files[0];
+// GENERATE
+function generateWish(){
+  document.getElementById("toShow").innerText =
+    "Dear " + toName.value;
+  document.getElementById("msgShow").innerText =
+    message.value;
+  document.getElementById("fromShow").innerText =
+    "- " + fromName.value;
+
+  const file = photo.files[0];
   if(file){
-    let r = new FileReader();
-    r.onload = ()=> savedData.img = r.result;
-    r.readAsDataURL(file);
+    document.getElementById("imgShow").src = URL.createObjectURL(file);
   }
-
-  show("hold");
-
-  setTimeout(revealWish,5000);
-}
-
-function revealWish(){
-  let p = prompt("Enter Password");
-  if(p !== savedData.pass){
-    alert("Wrong password");
-    return;
-  }
-
-  wishTitle.innerText = `💖 ${savedData.to} 💖`;
-  wishMsg.innerText = savedData.msg;
-  if(savedData.img) wishPhoto.src = savedData.img;
-
   show("wish");
+  fireworks();
 }
 
-function shareWish(){
-  navigator.share({
-    title:"WishHeart",
-    text:"Open my wish ❤️",
-    url:location.href
-  });
+// SHARE
+function share(){
+  if(navigator.share){
+    navigator.share({
+      title:"WishHeart",
+      text:"Special wish for you ❤️",
+      url:location.href
+    });
+  } else {
+    alert("Copy link & share");
+  }
+}
+
+// FIREWORKS
+function fireworks(){
+  const c = document.getElementById("fireworks");
+  const ctx = c.getContext("2d");
+  c.width=innerWidth; c.height=innerHeight;
+  for(let i=0;i<100;i++){
+    ctx.fillStyle=`hsl(${Math.random()*360},100%,50%)`;
+    ctx.beginPath();
+    ctx.arc(Math.random()*c.width,Math.random()*c.height,3,0,7);
+    ctx.fill();
+  }
 }
