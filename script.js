@@ -1,60 +1,49 @@
-let holdTimer;
-let holdDone = false;
-
-const heart = document.getElementById("heart");
-const passwordBox = document.getElementById("passwordBox");
-const firework = document.getElementById("firework");
-const photoScreen = document.getElementById("photoScreen");
-const noteScreen = document.getElementById("noteScreen");
-
-// HOLD HEART
-heart.addEventListener("mousedown", startHold);
-heart.addEventListener("touchstart", startHold);
-
-heart.addEventListener("mouseup", cancelHold);
-heart.addEventListener("mouseleave", cancelHold);
-heart.addEventListener("touchend", cancelHold);
-
-function startHold() {
-  holdTimer = setTimeout(() => {
-    holdDone = true;
-    document.getElementById("holdScreen").style.display = "none";
-    passwordBox.style.display = "flex";
-  }, 5000);
+function show(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
 }
 
-function cancelHold() {
-  if (!holdDone) clearTimeout(holdTimer);
-}
+// Splash → Form
+setTimeout(()=>show("form"),5000);
 
-// PASSWORD CHECK
-function unlockWish() {
-  const pass = document.getElementById("passwordInput").value;
-  if (pass === "1234") {
-    passwordBox.style.display = "none";
-    firework.style.display = "block";
+let savedData={};
 
-    setTimeout(() => {
-      firework.style.display = "none";
-      photoScreen.style.display = "flex";
-    }, 3000);
-  } else {
-    alert("Wrong Password ❌");
+function startWish(){
+  savedData.to = toName.value;
+  savedData.from = fromName.value;
+  savedData.msg = message.value;
+  savedData.pass = password.value;
+
+  let file = photo.files[0];
+  if(file){
+    let r = new FileReader();
+    r.onload = ()=> savedData.img = r.result;
+    r.readAsDataURL(file);
   }
+
+  show("hold");
+
+  setTimeout(revealWish,5000);
 }
 
-// NEXT TO NOTE
-function nextToNote() {
-  photoScreen.style.display = "none";
-  noteScreen.style.display = "flex";
+function revealWish(){
+  let p = prompt("Enter Password");
+  if(p !== savedData.pass){
+    alert("Wrong password");
+    return;
+  }
+
+  wishTitle.innerText = `💖 ${savedData.to} 💖`;
+  wishMsg.innerText = savedData.msg;
+  if(savedData.img) wishPhoto.src = savedData.img;
+
+  show("wish");
 }
 
-// SHARE LINK
-function shareWish() {
-  const link = window.location.href;
+function shareWish(){
   navigator.share({
-    title: "WishHeart ❤️",
-    text: "Open my special wish 💌",
-    url: link
+    title:"WishHeart",
+    text:"Open my wish ❤️",
+    url:location.href
   });
 }
