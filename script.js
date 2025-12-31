@@ -1,34 +1,23 @@
-// Splash timer
-setTimeout(() => {
-  document.getElementById("splash").style.display = "none";
-  document.getElementById("home").classList.remove("hidden");
-}, 5000);
+// Splash auto move
+setTimeout(()=>{
+  document.getElementById("splash").classList.add("hide");
+  document.getElementById("home").classList.remove("hide");
+},5000);
 
-// Navigation
-function openForm() {
-  hideAll();
-  document.getElementById("form").classList.remove("hidden");
+function openForm(){
+  document.getElementById("home").classList.add("hide");
+  document.getElementById("form").classList.remove("hide");
 }
 
-function generateWish() {
-  let to = document.getElementById("toName").value;
-  let from = document.getElementById("fromName").value;
-  let msg = document.getElementById("message").value;
+function generateWish(){
+  let to = document.getElementById("to").value;
+  let from = document.getElementById("from").value;
+  let msg = document.getElementById("msg").value;
 
-  document.getElementById("finalText").innerText =
-    "Dear " + to + " ❤️\n" + msg + "\n\nFrom: " + from;
+  document.getElementById("wishTo").innerText = "Dear " + to;
+  document.getElementById("wishMsg").innerText = msg;
+  document.getElementById("wishFrom").innerText = "From " + from;
 
-  hideAll();
-  document.getElementById("wish").classList.remove("hidden");
-}
-
-function restart() {
-  hideAll();
-  document.getElementById("home").classList.remove("hidden");
-}
-
-function hideAll() {
-  document.getElementById("home").classList.add("hidden");
-  document.getElementById("form").classList.add("hidden");
-  document.getElementById("wish").classList.add("hidden");
+  document.getElementById("form").classList.add("hide");
+  document.getElementById("wish").classList.remove("hide");
 }
