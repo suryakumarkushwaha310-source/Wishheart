@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>WishHeart App</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- SPLASH -->
+<div id="splash">
+  <img src="https://i.imgur.com/9QZ7K8E.png" class="teddy">
+  <h2>Welcome</h2>
+  <p class="loading">Loading...</p>
+  <p class="made">Made by Sumit</p>
+</div>
+
+<!-- HOME -->
+<div id="home" class="hidden">
+  <div class="top">
+    <h1>Welcome</h1>
+    <button onclick="toggleMenu()">⋮</button>
+  </div>
+
+  <div id="menu" class="hidden"></div>
+
+  <div class="newProject" onclick="openCreator()">
+    + New Project
+  </div>
+</div>
+
+<!-- CREATOR -->
+<div id="creator" class="hidden">
+  <h2>Choose your category</h2>
+  <button onclick="startForm('newyear')">🎆 New Year</button>
+  <button onclick="startForm('birthday')">🎂 Birthday</button>
+</div>
+
+<!-- FORM -->
+<div id="form" class="hidden">
+  <input id="toName" placeholder="Name you want to wish">
+  <input id="fromName" placeholder="Your name">
+  <textarea id="message" placeholder="Write message"></textarea>
+  <input type="file" id="photo">
+  <input id="password" placeholder="Set password">
+  <button onclick="generateWish()">Generate Link</button>
+</div>
+
+<!-- PASSWORD -->
+<div id="passwordScreen" class="hidden">
+  <input id="passInput" placeholder="Enter password">
+  <button onclick="checkPassword()">Open Wish</button>
+</div>
+
+<!-- HOLD HEART -->
+<div id="holdScreen" class="hidden">
+  <div id="heart" onmousedown="holdStart()" onmouseup="holdEnd()">
+    ❤️
+    <span>Hold 5 sec</span>
+  </div>
+</div>
+
+<!-- WISH -->
+<div id="wish" class="hidden">
+  <h1 id="wishTitle"></h1>
+  <img id="wishPhoto">
+  <p id="wishMsg"></p>
+  <button onclick="showNotebook()">Next</button>
+</div>
+
+<!-- NOTEBOOK -->
+<div id="notebook" class="hidden" onclick="openNote()">
+  📓 Click to open
+</div>
+
+<div id="noteText" class="hidden">
+  <p id="noteMsg"></p>
+  <button onclick="finalScreen()">Next</button>
+</div>
+
+<!-- FINAL -->
+<div id="final" class="hidden">
+  🌹 🍫  
+  <h2>It's for you dear</h2>
+  <button onclick="saveWish()">Save</button>
+</div>
+
+<canvas id="fireworks"></canvas>
+
+<script src="script.js"></script>
+</body>
+  </html>
