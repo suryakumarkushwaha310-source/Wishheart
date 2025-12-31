@@ -1,148 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>WishHeart</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI;}
-body{background:#000;color:#fff;overflow:hidden}
-
-/* SCREENS */
-.screen{display:none;width:100vw;height:100vh;position:absolute;top:0;left:0}
-.show{display:flex}
-
-/* SPLASH */
-#splash{background:black;flex-direction:column;justify-content:center;align-items:center}
-#teddy{font-size:80px}
-#splash h1{margin:10px 0}
-#loading{color:white;margin-top:10px}
-
-/* HOME */
-#home{background:white;color:black;flex-direction:column;align-items:center}
-.top{width:100%;padding:15px;font-size:22px}
-#newBtn{margin-top:120px;font-size:26px;border:2px dashed pink;padding:30px;border-radius:15px}
-
-/* CATEGORY */
-#category{background:white;color:black;flex-direction:column;justify-content:center;align-items:center}
-.cat{padding:15px 40px;margin:10px;border-radius:10px;background:pink}
-
-/* FORM */
-#form{background:#fff;color:#000;flex-direction:column;align-items:center;overflow:auto}
-input,textarea{width:90%;margin:8px;padding:10px}
-button{padding:12px 25px;background:#ff4d6d;border:none;color:white;border-radius:8px}
-
-/* PASSWORD */
-#password{background:white;color:black;flex-direction:column;justify-content:center;align-items:center}
-
-/* WISH */
-#wish{background:#2b003f;flex-direction:column;justify-content:center;align-items:center}
-.heart{font-size:80px;animation:pulse 1s infinite}
-@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.2)}100%{transform:scale(1)}}
-
-.hearts span{
-position:absolute;
-color:pink;
-animation:float 6s linear infinite;
-}
-@keyframes float{
-from{bottom:-10px;opacity:1}
-to{bottom:110%;opacity:0}
-}
-</style>
+  <meta charset="UTF-8" />
+  <title>WishHeart</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
 
 <!-- SPLASH -->
-<div id="splash" class="screen show">
-  <div id="teddy">🧸</div>
-  <h1>Welcome</h1>
-  <div id="loading">Loading...</div>
-  <p>Made by Sumit</p>
+<div id="splash" class="screen active">
+  <div class="teddy">🧸</div>
+  <div class="heart">❤️</div>
+  <h2>Welcome</h2>
+  <p class="loading">Loading...</p>
+  <p class="made">Made by Sumit</p>
 </div>
 
 <!-- HOME -->
 <div id="home" class="screen">
-  <div class="top">⋮ Welcome</div>
-  <div id="newBtn" onclick="go('category')">＋ New Project</div>
+  <div class="top">
+    <div class="menu" onclick="showSaved()">⋮</div>
+    <h1>Welcome</h1>
+  </div>
+  <div class="newProject" onclick="openCategory()">＋<br/>New Project</div>
 </div>
 
 <!-- CATEGORY -->
 <div id="category" class="screen">
   <h2>Choose Your Category</h2>
-  <div class="cat" onclick="type='New Year';go('form')">🎉 New Year</div>
-  <div class="cat" onclick="type='Birthday';go('form')">🎂 Birthday</div>
+  <button onclick="openForm('newyear')">🎉 New Year</button>
+  <button onclick="openForm('birthday')">🎂 Birthday</button>
 </div>
 
 <!-- FORM -->
 <div id="form" class="screen">
   <h2 id="formTitle"></h2>
-  <input id="to" placeholder="Person Name">
-  <input id="from" placeholder="Your Name">
-  <textarea id="msg" placeholder="Write Message"></textarea>
-  <input type="file">
-  <input id="pass" placeholder="Set Password">
-  <button onclick="save()">Generate Wish</button>
+  <input id="toName" placeholder="Person Name" />
+  <input id="fromName" placeholder="Your Name" />
+  <textarea id="message" placeholder="Write message"></textarea>
+  <input type="file" id="photo" />
+  <input id="password" placeholder="Set Password" />
+  <button onclick="generateWish()">Generate Wish</button>
 </div>
 
 <!-- PASSWORD -->
-<div id="password" class="screen">
+<div id="passwordScreen" class="screen">
   <h2>Enter Password</h2>
-  <input id="pcheck">
-  <button onclick="unlock()">Open</button>
+  <input id="checkPassword" placeholder="Password" />
+  <button onclick="unlockWish()">Unlock</button>
 </div>
 
 <!-- WISH -->
-<div id="wish" class="screen">
+<div id="wish" class="screen wishBg">
   <div class="hearts"></div>
-  <div class="heart" onclick="finalWish()">❤️</div>
-  <p>Tap Heart</p>
+  <div class="box">
+    <div class="bigHeart" id="holdHeart">❤️</div>
+    <p>Hold for 5 seconds</p>
+  </div>
 </div>
 
-<script>
-let type="",data={}
+<!-- FINAL -->
+<div id="final" class="screen finalBg">
+  <div class="box">
+    <h1 id="finalTitle"></h1>
+    <p id="finalFrom"></p>
+    <p id="finalMsg"></p>
+    <button onclick="goHome()">Save</button>
+  </div>
+</div>
 
-setTimeout(()=>go("home"),5000)
-
-function go(id){
-document.querySelectorAll('.screen').forEach(s=>s.classList.remove('show'))
-document.getElementById(id).classList.add('show')
-if(id=="form")formTitle.innerText=type+" Wish"
-}
-
-function save(){
-data={
-to:to.value,
-from:from.value,
-msg:msg.value,
-pass:pass.value
-}
-go("password")
-}
-
-function unlock(){
-if(pcheck.value==data.pass){
-go("wish")
-startHearts()
-}else alert("Wrong Password")
-}
-
-function startHearts(){
-for(let i=0;i<20;i++){
-let h=document.createElement("span")
-h.innerHTML="❤️"
-h.style.left=Math.random()*100+"%"
-h.style.animationDelay=Math.random()*5+"s"
-document.querySelector(".hearts").appendChild(h)
-}
-}
-
-function finalWish(){
-alert(type+" Wishes for "+data.to+"\nBy "+data.from+"\n"+data.msg)
-}
-</script>
-
+<script src="script.js"></script>
 </body>
-</html>
+  </html>
